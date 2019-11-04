@@ -1,0 +1,8 @@
+# Project exclude paths
+/platform-admin/target/
+/platform-api/target/
+/platform-common/target/
+/platform-framework/target/
+/platform-gen/target/
+/platform-schedule/target/
+/platform-shop/target/
