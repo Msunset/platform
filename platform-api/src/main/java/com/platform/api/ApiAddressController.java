@@ -37,7 +37,7 @@ public class ApiAddressController extends ApiBaseAction {
      * 获取用户的收货地址
      */
     @ApiOperation(value = "获取用户的收货地址接口", response = Map.class)
-    @GetMapping("list")
+    @RequestMapping("/list")
     public Object list(@LoginUser UserVo loginUser) {
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("user_id", loginUser.getUserId());

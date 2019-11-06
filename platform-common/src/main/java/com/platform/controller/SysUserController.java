@@ -3,15 +3,13 @@ package com.platform.controller;
 import java.util.List;
 import java.util.Map;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.platform.annotation.SysLog;
 import com.platform.dao.SysUserDao;
@@ -40,6 +38,7 @@ import com.platform.validator.group.UpdateGroup;
  */
 @RestController
 @RequestMapping("/sys/user")
+@Api("用户管理")
 public class SysUserController extends AbstractController {
     @Autowired
     private SysUserService sysUserService;
@@ -125,8 +124,9 @@ public class SysUserController extends AbstractController {
      * 保存用户
      */
     @SysLog("保存用户")
-    @RequestMapping("/save")
+    @RequestMapping(value = "/save",method = RequestMethod.POST)
     @RequiresPermissions("sys:user:save")
+    @ApiOperation("商户注册接口")
     public R save(@RequestBody SysUserEntity user) {
         ValidatorUtils.validateEntity(user, AddGroup.class);
         int count=sysUserDao.mlsUseCount(user.getMobile());

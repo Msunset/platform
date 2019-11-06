@@ -1,5 +1,4 @@
 package com.platform.controller;
-
 import com.platform.annotation.SysLog;
 import com.platform.entity.SysConfigEntity;
 import com.platform.service.SysConfigService;
@@ -10,10 +9,8 @@ import com.platform.validator.ValidatorUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Map;
-
 /**
  * 系统配置信息Controller
  *
@@ -94,7 +91,6 @@ public class SysConfigController extends AbstractController {
 
         return R.ok();
     }
-
     /**
      * 删除配置
      *
@@ -109,5 +105,4 @@ public class SysConfigController extends AbstractController {
 
         return R.ok();
     }
-
 }

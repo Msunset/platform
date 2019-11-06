@@ -48,7 +48,7 @@ CREATE TABLE `group_buying_detailed` (
   `user_img` varchar(200) DEFAULT NULL COMMENT '用户图像',
   `pay_time` datetime DEFAULT NULL COMMENT '购买时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4  ;
 
 /*Data for the table `group_buying_detailed` */
 
