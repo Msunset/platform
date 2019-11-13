@@ -30,9 +30,11 @@ public class ShopAuditController {
 
     }
     @RequestMapping("/findAllByPage")
-    public ResultState findAllByPage(@RequestParam(value = "state",required = false,defaultValue = "null") Integer state,@RequestParam Integer page, @RequestParam Integer size){
-        PageResult pageList = shopAuditService.findSearch(state,page,size);
-        return new ResultState("查询成功",true,ResultState.OK,pageList);
+    public ResultState findAllByPage(@RequestParam Map<String,Object> params){
+        Query query = new Query(params);
+
+        List<NideshopShopaudit> shopAudits = shopAuditService.findSearch(params);
+        return new ResultState("查询成功",true,ResultState.OK,shopAudits);
 
     }
     //更新店铺审核状态

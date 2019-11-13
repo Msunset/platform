@@ -55,6 +55,7 @@ public class ShopAuditServiceImpl implements ShopAuditService {
     public PageResult findSearch(Integer state, Integer page, Integer size) {
         NideshopShopauditExample example = new NideshopShopauditExample();
         NideshopShopauditExample.Criteria criteria = example.createCriteria();
+
         if (state != null){
             criteria.andStateEqualTo(state);
             PageHelper.startPage(page,size);
