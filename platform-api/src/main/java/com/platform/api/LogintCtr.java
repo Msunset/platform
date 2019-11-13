@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -42,7 +43,7 @@ public class LogintCtr extends ApiBaseAction{
 	@IgnoreAuth
 	public Object userLogin(
 			@ApiParam(name = "mobile", value = "手机号") @RequestParam String mobile,
-			@ApiParam(name = "captcha", value = "手机号") @RequestParam String captcha,HttpServletRequest request){
+			@ApiParam(name = "captcha", value = "验证码") @RequestParam String captcha, HttpServletRequest request, HttpServletResponse response){
 		Subject subject = SecurityUtils.getSubject();
 		if(StringUtils.isEmpty(mobile)) {
 			toResponsFail("用户手机号不可为空");
@@ -51,7 +52,8 @@ public class LogintCtr extends ApiBaseAction{
 			toResponsFail("验证码证错误");
 		};
 		MlsUserEntity2 mlsUser=new MlsUserEntity2 ();
-		mlsUser.setDeviceId("weglapp_"+ UUID.randomUUID());
+		String key = "weglapp_"+ UUID.randomUUID();
+		mlsUser.setDeviceId(key);
 		mlsUser.setUserTel(mobile);
 		int tol=mlsUserSer.getEntityMapper().update(mlsUser);
 		if(tol==0) {
@@ -59,6 +61,11 @@ public class LogintCtr extends ApiBaseAction{
 			mlsUserSer.getEntityMapper().updateRootId(mlsUser);
 		}
 		mlsUserSer.getEntityMapper().findByUserTel(mobile);
+//		request.setAttribute("LOGIN_TOKEN_KEY",key);
+//		System.out.println(request.getHeader("LOGIN_TOKEN_KEY"));
+		response.setHeader("X-Nideshop-Token",key);
+		System.out.println(request.getHeader("X-Nideshop-Token"));
+		System.out.println(response.getHeader("X-Nideshop-Token"));
 		return toResponsSuccess(mlsUser);
 	}
 

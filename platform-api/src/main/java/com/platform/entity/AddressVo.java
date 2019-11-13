@@ -1,10 +1,6 @@
 package com.platform.entity;
-
 import org.apache.commons.lang.StringUtils;
-
 import java.io.Serializable;
-
-
 /**
  * @author lipengjun
  * @email 939961241@qq.com
@@ -12,8 +8,6 @@ import java.io.Serializable;
  */
 public class AddressVo implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    //
     private Long id;
     //会员ID
     private Long userId;
@@ -33,10 +27,8 @@ public class AddressVo implements Serializable {
     private String countyName;
     //详细收货地址信息
     private String detailInfo;
-
     //默认
     private Integer is_default = 0;
-
     private String full_region;
 
     /**

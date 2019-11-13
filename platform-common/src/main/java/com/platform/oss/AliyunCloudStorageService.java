@@ -1,6 +1,7 @@
 package com.platform.oss;
 
 import com.aliyun.oss.OSSClient;
+import com.aliyun.oss.model.ObjectMetadata;
 import com.platform.utils.RRException;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -44,7 +45,9 @@ public class AliyunCloudStorageService extends CloudStorageService {
     @Override
     public String upload(InputStream inputStream, String path) {
         try {
-            client.putObject(config.getAliyunBucketName(), path, inputStream);
+            ObjectMetadata objectMetadata = new ObjectMetadata();
+            objectMetadata.setContentType("image/jpg");
+            client.putObject(config.getAliyunBucketName(), path, inputStream,objectMetadata);
         } catch (Exception e) {
             throw new RRException("上传文件失败，请检查配置信息", e);
         }

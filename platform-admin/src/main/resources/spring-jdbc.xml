@@ -97,4 +97,5 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.platform.dao,com.platform.*.dao"/>
     </bean>
+
 </beans>

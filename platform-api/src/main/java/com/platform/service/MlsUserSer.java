@@ -49,6 +49,7 @@ public class MlsUserSer  {
 
 	public void sendCode(String mobile) {
 		String random = CharUtil.getRandomNum(6);
+		System.out.println(random);
 		Map<String, String> paramMap = new HashMap<>(1);
 		paramMap.put("code", random);
 		try {

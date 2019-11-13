@@ -119,7 +119,7 @@ var vm = new Vue({
                 isHot: 0,
                 retailPrice: 0,
                 marketPrice: 0,
-                goodsNumber: 0,
+                goodsNumber: 1,
                 sellVolume:0,
                 isSecKill :1,
                 successPeople: 0,

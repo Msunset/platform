@@ -36,7 +36,9 @@ public class GoodsController {
         SysUserEntity sysUserEntity= ShiroUtils.getUserEntity();
         //查询列表数据
         Query query = new Query(params);
-        query.put("merchantId",sysUserEntity.getMerchantId());
+        if (sysUserEntity.getMerchantId() != 100001){
+            query.put("merchantId",sysUserEntity.getMerchantId());
+        }
         query.put("isDelete", 0);
         List<GoodsEntity> goodsList = goodsService.queryList(query);
         int total = goodsService.queryTotal(query);
