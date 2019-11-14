@@ -1,5 +1,4 @@
 package com.platform.page;
-
 import org.apache.ibatis.executor.parameter.ParameterHandler;
 import org.apache.ibatis.executor.resultset.ResultSetHandler;
 import org.apache.ibatis.executor.statement.StatementHandler;
@@ -14,7 +13,6 @@ import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
 import org.apache.ibatis.scripting.defaults.DefaultParameterHandler;
 import org.apache.log4j.Logger;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,7 +20,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 import java.util.Properties;
-
 /**
  * Mybatis - 通用分页拦截器
  *
@@ -202,7 +199,6 @@ public class PageHelper implements Interceptor {
 
     /**
      * 代入参数值
-     *
      * @param ps
      * @param mappedStatement
      * @param boundSql

@@ -10,6 +10,7 @@
             classpath:spring-mvc.xml
             classpath:spring-jdbc.xml
             classpath*:platform-*.xml
+            classpath*:mybatis.xml
         </param-value>
     </context-param>
 

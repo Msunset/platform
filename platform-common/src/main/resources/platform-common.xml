@@ -6,4 +6,6 @@
 
 <!--    <bean id="cacheUtil" class="com.platform.cache.CacheUtil"/>-->
     <bean id="regionCacheUtil" class="com.platform.cache.RegionCacheUtil"/>
+
+
 </beans>

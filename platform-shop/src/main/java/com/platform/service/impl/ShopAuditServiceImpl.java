@@ -8,10 +8,13 @@ import com.platform.entity.NideshopShopaudit;
 import com.platform.entity.NideshopShopauditExample;
 import com.platform.page.PageResult;
 import com.platform.service.ShopAuditService;
+import com.platform.utils.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+
 @Service
 public class ShopAuditServiceImpl implements ShopAuditService {
     @Autowired
@@ -52,23 +55,14 @@ public class ShopAuditServiceImpl implements ShopAuditService {
     }
 
     @Override
-    public PageResult findSearch(Integer state, Integer page, Integer size) {
-        NideshopShopauditExample example = new NideshopShopauditExample();
-        NideshopShopauditExample.Criteria criteria = example.createCriteria();
-
-        if (state != null){
-            criteria.andStateEqualTo(state);
-            PageHelper.startPage(page,size);
-            List<NideshopShopaudit> list = shopAuditMapper.selectByExample(example);
-            PageInfo<NideshopShopaudit> PageInfo = new PageInfo<>(list);
-            return new PageResult(PageInfo.getTotal(),PageInfo.getList());
-        }else {
-            PageHelper.startPage(page, size);
-            List<NideshopShopaudit> list = shopAuditMapper.selectByExample(null);
-            PageInfo<NideshopShopaudit> PageInfo = new PageInfo<>(list);
-            return new PageResult(PageInfo.getTotal(),PageInfo.getList());
-
-        }
-
+    public List<NideshopShopaudit> queryList(Map<String,Object> map) {
+        return null;
     }
+
+    @Override
+    public int queryTotal(Map<String,Object> map) {
+        return 0;
+    }
+
+
 }
