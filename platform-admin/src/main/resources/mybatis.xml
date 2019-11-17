@@ -9,7 +9,10 @@
         <plugin interceptor="com.github.miemiedev.mybatis.paginator.OffsetLimitInterceptor">
             <property name="dialectClass" value="com.github.miemiedev.mybatis.paginator.dialect.MySQLDialect"/>
         </plugin>
+
     </plugins>
+
+
 <!--    <plugins>-->
 <!--        <plugin interceptor="com.github.pagehelper.PageInterceptor">-->
 <!--            &lt;!&ndash;分页参数合理化  &ndash;&gt;-->

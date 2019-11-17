@@ -1,8 +1,10 @@
 package com.platform.controller;
 
 import com.platform.entity.GoodsEntity;
+import com.platform.entity.ShopauditEntity;
 import com.platform.entity.SysUserEntity;
 import com.platform.service.GoodsService;
+import com.platform.service.ShopauditService;
 import com.platform.utils.PageUtils;
 import com.platform.utils.Query;
 import com.platform.utils.R;
@@ -26,6 +28,9 @@ import java.util.Map;
 public class GoodsController {
     @Autowired
     private GoodsService goodsService;
+    @Autowired
+    private ShopauditService shopauditService;
+
 
     /**
      * 查看列表

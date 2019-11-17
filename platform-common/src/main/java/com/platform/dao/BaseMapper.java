@@ -40,7 +40,7 @@ public interface BaseMapper<T, E> {
 	 * @return
 	 */
 	@Deprecated
-	int deleteByPrimaryKey(Long id);
+	int deleteByPrimaryKey(Integer id);
 
 	/**
 	 * 按主键批量物理删除记录<br>
@@ -79,7 +79,7 @@ public interface BaseMapper<T, E> {
 	 * @param id
 	 * @return
 	 */
-	T selectByPrimaryKey(Long id);
+	T selectByPrimaryKey(Integer id);
 
 	/**
 	 * 根据example条件将record中非空字段更新到数据库

@@ -44,6 +44,7 @@ public class SysLoginController {
         BufferedImage image = producer.createImage(text);
         //保存到shiro session
         ShiroUtils.setSessionAttribute(Constants.KAPTCHA_SESSION_KEY, text);
+        System.out.println(text);
 
         ServletOutputStream out = response.getOutputStream();
         ImageIO.write(image, "jpg", out);
@@ -58,12 +59,12 @@ public class SysLoginController {
     public R login(String username, String password, String captcha) throws IOException {
       //  String kaptcha="1111";
         String kaptcha = ShiroUtils.getKaptcha(Constants.KAPTCHA_SESSION_KEY);
-        if(null == kaptcha){
-            return R.error("验证码已失效");
-        }
-        if (!captcha.equalsIgnoreCase(kaptcha)) {
-            return R.error("验证码不正确");
-        }
+//        if(null == kaptcha){
+//            return R.error("验证码已失效");
+//        }
+//        if (!captcha.equalsIgnoreCase(kaptcha)) {
+//            return R.error("验证码不正确");
+//        }
 
         try {
             Subject subject = ShiroUtils.getSubject();

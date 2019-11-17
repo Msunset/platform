@@ -10,8 +10,8 @@
         <module name="platform-gen" />
         <module name="platform-common" />
         <module name="platform-api" />
-        <module name="platform-admin" />
         <module name="platform-schedule" />
+        <module name="platform-admin" />
         <module name="platform-framework" />
       </profile>
     </annotationProcessing>
@@ -28,7 +28,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="platform-api" options="-verbose -bootclasspath $PROJECT_DIR$/../jdk8_lsb64Bit_itmop.com/tools/jre\lib\rt.jar;$PROJECT_DIR$/../jdk8_lsb64Bit_itmop.com/tools/jre\lib\jce.jar" />
+      <module name="platform-api" options="-verbose -bootclasspath &quot;C:\Program Files\JetBrains\IntelliJ IDEA 2019.1.3\jbr\lib\rt.jar;C:\Program Files\JetBrains\IntelliJ IDEA 2019.1.3\jbr\lib\jce.jar&quot;" />
     </option>
   </component>
 </project>
