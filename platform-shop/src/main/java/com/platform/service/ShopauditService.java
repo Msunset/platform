@@ -1,7 +1,6 @@
 package com.platform.service;
 
 import com.platform.entity.ShopauditEntity;
-import com.platform.utils.ResultState;
 
 import java.util.List;
 import java.util.Map;
@@ -9,9 +8,9 @@ import java.util.Map;
 /**
  * Service接口
  *
- * @author lipengjun
- * @email 939961241@qq.com
- * @date 2019-11-15 20:03:40
+ * @author sunset
+ * @email 1451795113@qq.com
+ * @date 2019-11-19 15:53:32
  */
 public interface ShopauditService {
 
@@ -70,6 +69,4 @@ public interface ShopauditService {
      * @return 删除条数
      */
     int deleteBatch(Integer[] ids);
-
-    void updateState(Integer states ,String[] userId);
 }

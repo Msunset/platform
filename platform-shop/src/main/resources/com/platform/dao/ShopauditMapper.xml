@@ -16,6 +16,8 @@
         <result property="state" column="state"/>
         <result property="creattime" column="creatTime"/>
         <result property="userid" column="userId"/>
+        <result property="idcard" column="idcard"/>
+        <result property="idcardimage" column="idcardImage"/>
     </resultMap>
 
     <sql id="Example_Where_Clause" >
@@ -88,7 +90,9 @@
 	    `email`,
 	    `state`,
 	    `creatTime`,
-	    `userId`
+	    `userId`,
+	    `idcard`,
+	    `idcardImage`
   	</sql>
 
 
@@ -143,7 +147,9 @@
           `email`,
           `state`,
           `creatTime`,
-          `userId`        )
+          `userId`,
+          `idcard`,
+          `idcardImage`        )
 		values(
           #{shopname},
           #{type},
@@ -155,7 +161,9 @@
           #{email},
           #{state},
           #{creattime},
-          #{userid}         )
+          #{userid},
+          #{idcard},
+          #{idcardimage}         )
 	</insert>
 
 
@@ -193,7 +201,13 @@
             `creatTime`,
           </if>
           <if test="userid != null">
-            `userId`
+            `userId`,
+          </if>
+          <if test="idcard != null">
+            `idcard`,
+          </if>
+          <if test="idcardimage != null">
+            `idcardImage`
           </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -228,7 +242,13 @@
               #{creattime},
             </if>
             <if test="userid != null">
-              #{userid}
+              #{userid},
+            </if>
+            <if test="idcard != null">
+              #{idcard},
+            </if>
+            <if test="idcardimage != null">
+              #{idcardimage}
             </if>
         </trim>
     </insert>
@@ -273,7 +293,13 @@
               `creatTime` = #{creattime},
           </if>
           <if test="userid != null">
-              `userId` = #{userid}
+              `userId` = #{userid},
+          </if>
+          <if test="idcard != null">
+              `idcard` = #{idcard},
+          </if>
+          <if test="idcardimage != null">
+              `idcardImage` = #{idcardimage}
           </if>
         </set>
         <if test="_parameter != null" >
@@ -293,7 +319,9 @@
           `email` = #{email},
           `state` = #{state},
           `creatTime` = #{creattime},
-          `userId` = #{userid}
+          `userId` = #{userid},
+          `idcard` = #{idcard},
+          `idcardImage` = #{idcardimage}
         </set>
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
@@ -334,7 +362,13 @@
             `creatTime` = #{creattime},
           </if>
           <if test="userid != null">
-            `userId` = #{userid}
+            `userId` = #{userid},
+          </if>
+          <if test="idcard != null">
+            `idcard` = #{idcard},
+          </if>
+          <if test="idcardimage != null">
+            `idcardImage` = #{idcardimage}
           </if>
         </set>
         where id = #{id}
@@ -352,7 +386,9 @@
             `email` = #{email},
             `state` = #{state},
             `creatTime` = #{creattime},
-            `userId` = #{userid}
+            `userId` = #{userid},
+            `idcard` = #{idcard},
+            `idcardImage` = #{idcardimage}
         </set>
         where id = #{id,jdbcType=BIGINT}
   </update>
@@ -371,7 +407,9 @@
           `email`,
           `state`,
           `creatTime`,
-          `userId`
+          `userId`,
+          `idcard`,
+          `idcardImage`
         from nideshop_shopaudit
         WHERE 1=1
         <if test="name != null and name.trim() != ''">

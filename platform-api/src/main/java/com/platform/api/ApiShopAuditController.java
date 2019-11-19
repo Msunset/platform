@@ -20,6 +20,7 @@ public class ApiShopAuditController {
     @ApiOperation("商户添加")
     @PostMapping("/save")
     public ResultState saveShop(@RequestBody NideshopShopaudit nideshopShopaudit){
+        System.out.printf(String.valueOf(nideshopShopaudit));
         try {
             shopAuditService.save(nideshopShopaudit);
         } catch (Exception e) {

@@ -7,7 +7,7 @@ public class NideshopShopaudit {
 
     private String shopname;
 
-    private Integer type;
+    private String type;
 
     private String business;
 
@@ -27,6 +27,10 @@ public class NideshopShopaudit {
 
     private String userid;
 
+    private String idcard;
+
+    private String idcardimage;
+
     public Integer getId() {
         return id;
     }
@@ -43,12 +47,12 @@ public class NideshopShopaudit {
         this.shopname = shopname == null ? null : shopname.trim();
     }
 
-    public Integer getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
     }
 
     public String getBusiness() {
@@ -121,5 +125,21 @@ public class NideshopShopaudit {
 
     public void setUserid(String userid) {
         this.userid = userid == null ? null : userid.trim();
+    }
+
+    public String getIdcard() {
+        return idcard;
+    }
+
+    public void setIdcard(String idcard) {
+        this.idcard = idcard == null ? null : idcard.trim();
+    }
+
+    public String getIdcardimage() {
+        return idcardimage;
+    }
+
+    public void setIdcardimage(String idcardimage) {
+        this.idcardimage = idcardimage == null ? null : idcardimage.trim();
     }
 }

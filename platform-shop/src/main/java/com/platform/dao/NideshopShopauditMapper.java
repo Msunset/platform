@@ -1,13 +1,12 @@
 package com.platform.dao;
 
-import com.platform.entity.GoodsEntity;
 import com.platform.entity.NideshopShopaudit;
 import com.platform.entity.NideshopShopauditExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface NideshopShopauditMapper extends BaseDao<NideshopShopaudit>{
+public interface NideshopShopauditMapper {
     long countByExample(NideshopShopauditExample example);
 
     int deleteByExample(NideshopShopauditExample example);

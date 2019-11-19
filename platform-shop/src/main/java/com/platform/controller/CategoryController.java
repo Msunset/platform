@@ -93,6 +93,7 @@ public class CategoryController {
      */
     @RequestMapping("/queryAll")
     public R queryAll(@RequestParam Map<String, Object> params) {
+        params.put("isShow",1);
 
         List<CategoryEntity> list = categoryService.queryList(params);
         //添加顶级菜单

@@ -7,9 +7,9 @@ import java.util.Date;
  * 实体
  * 表名 nideshop_shopaudit
  *
- * @author lipengjun
- * @email 939961241@qq.com
- * @date 2019-11-15 20:03:40
+ * @author sunset
+ * @email 1451795113@qq.com
+ * @date 2019-11-19 15:53:32
  */
 public class ShopauditEntity implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -18,8 +18,8 @@ public class ShopauditEntity implements Serializable {
     private Integer id;
     //店铺名称
     private String shopname;
-    //店铺申请经营类目
-    private Integer type;
+    //店铺申请经营类目,可以选择多类别
+    private String type;
     //企业或个体户营业执照
     private String business;
     //商标或品牌商业授权
@@ -38,6 +38,10 @@ public class ShopauditEntity implements Serializable {
     private Date creattime;
     //用户登录的id唯一标识 
     private String userid;
+    //身份证号
+    private String idcard;
+    //身份证图片
+    private String idcardimage;
 
     /**
      * 设置：
@@ -66,16 +70,16 @@ public class ShopauditEntity implements Serializable {
         return shopname;
     }
     /**
-     * 设置：店铺申请经营类目
+     * 设置：店铺申请经营类目,可以选择多类别
      */
-    public void setType(Integer type) {
+    public void setType(String type) {
         this.type = type;
     }
 
     /**
-     * 获取：店铺申请经营类目
+     * 获取：店铺申请经营类目,可以选择多类别
      */
-    public Integer getType() {
+    public String getType() {
         return type;
     }
     /**
@@ -194,5 +198,31 @@ public class ShopauditEntity implements Serializable {
      */
     public String getUserid() {
         return userid;
+    }
+    /**
+     * 设置：身份证号
+     */
+    public void setIdcard(String idcard) {
+        this.idcard = idcard;
+    }
+
+    /**
+     * 获取：身份证号
+     */
+    public String getIdcard() {
+        return idcard;
+    }
+    /**
+     * 设置：身份证图片
+     */
+    public void setIdcardimage(String idcardimage) {
+        this.idcardimage = idcardimage;
+    }
+
+    /**
+     * 获取：身份证图片
+     */
+    public String getIdcardimage() {
+        return idcardimage;
     }
 }

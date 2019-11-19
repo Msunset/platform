@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.platform.entity.NideshopShopaudit">
     <result column="id" jdbcType="INTEGER" property="id" />
     <result column="shopname" jdbcType="VARCHAR" property="shopname" />
-    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="business" jdbcType="VARCHAR" property="business" />
     <result column="brand" jdbcType="VARCHAR" property="brand" />
     <result column="aptitude" jdbcType="VARCHAR" property="aptitude" />
@@ -14,6 +14,8 @@
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="creatTime" jdbcType="TIMESTAMP" property="creattime" />
     <result column="userId" jdbcType="VARCHAR" property="userid" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="idcardImage" jdbcType="VARCHAR" property="idcardimage" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -75,7 +77,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, shopname, type, business, brand, aptitude, adminname, phone, email, state, creatTime, 
-    userId
+    userId, idcard, idcardImage
   </sql>
   <select id="selectByExample" parameterType="com.platform.entity.NideshopShopauditExample" resultMap="BaseResultMap">
     select
@@ -101,13 +103,13 @@
     insert into nideshop_shopaudit (id, shopname, type, 
       business, brand, aptitude, 
       adminname, phone, email, 
-      state, creatTime, userId
-      )
-    values (#{id,jdbcType=INTEGER}, #{shopname,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      state, creatTime, userId, 
+      idcard, idcardImage)
+    values (#{id,jdbcType=INTEGER}, #{shopname,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
       #{business,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, #{aptitude,jdbcType=VARCHAR}, 
       #{adminname,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{state,jdbcType=INTEGER}, #{creattime,jdbcType=TIMESTAMP}, #{userid,jdbcType=VARCHAR}
-      )
+      #{state,jdbcType=INTEGER}, #{creattime,jdbcType=TIMESTAMP}, #{userid,jdbcType=VARCHAR}, 
+      #{idcard,jdbcType=VARCHAR}, #{idcardimage,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.platform.entity.NideshopShopaudit">
     insert into nideshop_shopaudit
@@ -148,6 +150,12 @@
       <if test="userid != null">
         userId,
       </if>
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="idcardimage != null">
+        idcardImage,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -157,7 +165,7 @@
         #{shopname,jdbcType=VARCHAR},
       </if>
       <if test="type != null">
-        #{type,jdbcType=INTEGER},
+        #{type,jdbcType=VARCHAR},
       </if>
       <if test="business != null">
         #{business,jdbcType=VARCHAR},
@@ -186,6 +194,12 @@
       <if test="userid != null">
         #{userid,jdbcType=VARCHAR},
       </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardimage != null">
+        #{idcardimage,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.platform.entity.NideshopShopauditExample" resultType="java.lang.Long">
@@ -204,7 +218,7 @@
         shopname = #{record.shopname,jdbcType=VARCHAR},
       </if>
       <if test="record.type != null">
-        type = #{record.type,jdbcType=INTEGER},
+        type = #{record.type,jdbcType=VARCHAR},
       </if>
       <if test="record.business != null">
         business = #{record.business,jdbcType=VARCHAR},
@@ -233,6 +247,12 @@
       <if test="record.userid != null">
         userId = #{record.userid,jdbcType=VARCHAR},
       </if>
+      <if test="record.idcard != null">
+        idcard = #{record.idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idcardimage != null">
+        idcardImage = #{record.idcardimage,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -242,7 +262,7 @@
     update nideshop_shopaudit
     set id = #{record.id,jdbcType=INTEGER},
       shopname = #{record.shopname,jdbcType=VARCHAR},
-      type = #{record.type,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=VARCHAR},
       business = #{record.business,jdbcType=VARCHAR},
       brand = #{record.brand,jdbcType=VARCHAR},
       aptitude = #{record.aptitude,jdbcType=VARCHAR},
@@ -251,7 +271,9 @@
       email = #{record.email,jdbcType=VARCHAR},
       state = #{record.state,jdbcType=INTEGER},
       creatTime = #{record.creattime,jdbcType=TIMESTAMP},
-      userId = #{record.userid,jdbcType=VARCHAR}
+      userId = #{record.userid,jdbcType=VARCHAR},
+      idcard = #{record.idcard,jdbcType=VARCHAR},
+      idcardImage = #{record.idcardimage,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>

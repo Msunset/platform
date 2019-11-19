@@ -22,6 +22,7 @@ public class ApiCategoryController {
     @RequestMapping("/findCategory")
     public List<CategoryVo> findCategory(){
         Map<String, Object> map = new HashMap<>();
-       return categoryService.queryList(map);
+        List<CategoryVo> categoryVos = categoryService.queryList(map);
+        return categoryVos;
     }
 }
