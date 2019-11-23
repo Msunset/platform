@@ -51,6 +51,7 @@
 				/api/**=noSessionCreation
 	        	/login.html=anon
 	        	/sys/login=anon
+	        	/shopaudit/**=anon
 	        	/captcha.jpg=anon
 	        	/**=authc
 	        </value>

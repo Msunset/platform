@@ -9,7 +9,7 @@ import java.util.Date;
  *
  * @author sunset
  * @email 1451795113@qq.com
- * @date 2019-11-19 15:53:32
+ * @date 2019-11-23 15:14:27
  */
 public class ShopauditEntity implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -42,6 +42,10 @@ public class ShopauditEntity implements Serializable {
     private String idcard;
     //身份证图片
     private String idcardimage;
+    //店铺账号
+    private String shopAccount;
+    //店铺账号密码
+    private String password;
 
     /**
      * 设置：
@@ -224,5 +228,31 @@ public class ShopauditEntity implements Serializable {
      */
     public String getIdcardimage() {
         return idcardimage;
+    }
+    /**
+     * 设置：店铺账号
+     */
+    public void setShopAccount(String shopAccount) {
+        this.shopAccount = shopAccount;
+    }
+
+    /**
+     * 获取：店铺账号
+     */
+    public String getShopAccount() {
+        return shopAccount;
+    }
+    /**
+     * 设置：店铺账号密码
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * 获取：店铺账号密码
+     */
+    public String getPassword() {
+        return password;
     }
 }

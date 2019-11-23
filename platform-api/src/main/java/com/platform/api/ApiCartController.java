@@ -400,13 +400,11 @@ public class ApiCartController extends ApiBaseAction {
     @GetMapping("checkout")
     public Object checkout(@LoginUser UserVo loginUser, Integer couponId, @RequestParam(defaultValue = "cart") String type,Integer  addressId,String activityType) {
         //activityType="2";
-        System.out.printf(String.valueOf(loginUser));
-        System.out.printf(String.valueOf(couponId));
         Map<String, Object> resultObj = new HashMap();
         //根据收货地址计算运费
-        BigDecimal freightPrice = new BigDecimal(0);
+        BigDecimal freightPrice = new BigDecimal(0.00);
         //订单总金额
-        BigDecimal goodsTotalPrice=new BigDecimal(0);
+        BigDecimal goodsTotalPrice=new BigDecimal(0.00);
         //默认收货地址
         AddressVo checkedAddress=null;
         if(com.platform.utils.StringUtils.isNullOrEmpty(addressId) || addressId==0){

@@ -566,6 +566,7 @@ public class ApiGoodsController extends ApiBaseAction {
         params.put("limit", size);
         params.put("order", sort);
         params.put("sidx", order);
+        params.put("name", keyword);
         //
         if (null != sort && sort.equals("price")) {
             params.put("sidx", "retail_price");
@@ -592,9 +593,9 @@ public class ApiGoodsController extends ApiBaseAction {
         rootCategory.setChecked(false);
         filterCategory.add(rootCategory);
         //
-        params.put("fields", "category_id");
+        //params.put("fields", "category_id");
         List<GoodsVo> categoryEntityList = goodsService.queryList(params);
-        params.remove("fields");
+        //params.remove("fields");
         if (null != categoryEntityList && categoryEntityList.size() > 0) {
             List<Integer> categoryIds = new ArrayList();
             for (GoodsVo goodsVo : categoryEntityList) {

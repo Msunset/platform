@@ -54,8 +54,8 @@ public class LifeServiceSer {
 //        	return resultObj;
 //    	}
     	
-    	if(org.apache.commons.lang.StringUtils.isBlank(idcard) 
-    			|| org.apache.commons.lang.StringUtils.isBlank(realname)) {
+    	if(StringUtils.isBlank(idcard)
+    			|| StringUtils.isBlank(realname)) {
     		resultObj.put("errno", 2);
             resultObj.put("errmsg", "姓名、身份证号必须填写");
             return resultObj;

@@ -19,11 +19,11 @@
     </mvc:annotation-driven>
 
     <mvc:interceptors>
-    <mvc:interceptor>
-        <mvc:mapping path="/api/**"/>
-        <ref bean="authorizationInterceptor"/>
-    </mvc:interceptor>
-</mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/api/**"/>
+            <ref bean="authorizationInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
     <bean id="apiUserService" class="com.platform.service.ApiUserService"/>
 

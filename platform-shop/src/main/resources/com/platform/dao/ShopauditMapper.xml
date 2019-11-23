@@ -18,6 +18,8 @@
         <result property="userid" column="userId"/>
         <result property="idcard" column="idcard"/>
         <result property="idcardimage" column="idcardImage"/>
+        <result property="shopAccount" column="shop_account"/>
+        <result property="password" column="password"/>
     </resultMap>
 
     <sql id="Example_Where_Clause" >
@@ -92,7 +94,9 @@
 	    `creatTime`,
 	    `userId`,
 	    `idcard`,
-	    `idcardImage`
+	    `idcardImage`,
+	    `shop_account`,
+	    `password`
   	</sql>
 
 
@@ -149,7 +153,9 @@
           `creatTime`,
           `userId`,
           `idcard`,
-          `idcardImage`        )
+          `idcardImage`,
+          `shop_account`,
+          `password`        )
 		values(
           #{shopname},
           #{type},
@@ -163,7 +169,9 @@
           #{creattime},
           #{userid},
           #{idcard},
-          #{idcardimage}         )
+          #{idcardimage},
+          #{shopAccount},
+          #{password}         )
 	</insert>
 
 
@@ -207,7 +215,13 @@
             `idcard`,
           </if>
           <if test="idcardimage != null">
-            `idcardImage`
+            `idcardImage`,
+          </if>
+          <if test="shopAccount != null">
+            `shop_account`,
+          </if>
+          <if test="password != null">
+            `password`
           </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -248,7 +262,13 @@
               #{idcard},
             </if>
             <if test="idcardimage != null">
-              #{idcardimage}
+              #{idcardimage},
+            </if>
+            <if test="shopAccount != null">
+              #{shopAccount},
+            </if>
+            <if test="password != null">
+              #{password}
             </if>
         </trim>
     </insert>
@@ -299,7 +319,13 @@
               `idcard` = #{idcard},
           </if>
           <if test="idcardimage != null">
-              `idcardImage` = #{idcardimage}
+              `idcardImage` = #{idcardimage},
+          </if>
+          <if test="shopAccount != null">
+              `shop_account` = #{shopAccount},
+          </if>
+          <if test="password != null">
+              `password` = #{password}
           </if>
         </set>
         <if test="_parameter != null" >
@@ -321,7 +347,9 @@
           `creatTime` = #{creattime},
           `userId` = #{userid},
           `idcard` = #{idcard},
-          `idcardImage` = #{idcardimage}
+          `idcardImage` = #{idcardimage},
+          `shop_account` = #{shopAccount},
+          `password` = #{password}
         </set>
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
@@ -368,7 +396,13 @@
             `idcard` = #{idcard},
           </if>
           <if test="idcardimage != null">
-            `idcardImage` = #{idcardimage}
+            `idcardImage` = #{idcardimage},
+          </if>
+          <if test="shopAccount != null">
+            `shop_account` = #{shopAccount},
+          </if>
+          <if test="password != null">
+            `password` = #{password}
           </if>
         </set>
         where id = #{id}
@@ -388,7 +422,9 @@
             `creatTime` = #{creattime},
             `userId` = #{userid},
             `idcard` = #{idcard},
-            `idcardImage` = #{idcardimage}
+            `idcardImage` = #{idcardimage},
+            `shop_account` = #{shopAccount},
+            `password` = #{password}
         </set>
         where id = #{id,jdbcType=BIGINT}
   </update>
@@ -409,7 +445,9 @@
           `creatTime`,
           `userId`,
           `idcard`,
-          `idcardImage`
+          `idcardImage`,
+          `shop_account`,
+          `password`
         from nideshop_shopaudit
         WHERE 1=1
         <if test="name != null and name.trim() != ''">

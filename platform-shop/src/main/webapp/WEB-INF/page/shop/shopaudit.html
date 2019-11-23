@@ -37,8 +37,8 @@
             <Form-item label="店铺名称" prop="shopname">
                 <i-input v-model="shopaudit.shopname" placeholder="店铺名称"/>
             </Form-item>
-            <Form-item label="店铺申请经营类目" prop="type">
-                <i-input v-model="shopaudit.type" placeholder="店铺申请经营类目"/>
+            <Form-item label="店铺申请经营类目,可以选择多类别" prop="type">
+                <i-input v-model="shopaudit.type" placeholder="店铺申请经营类目,可以选择多类别"/>
             </Form-item>
             <Form-item label="企业或个体户营业执照" prop="business">
                 <i-input v-model="shopaudit.business" placeholder="企业或个体户营业执照"/>
@@ -66,6 +66,18 @@
             </Form-item>
             <Form-item label="用户登录的id唯一标识 " prop="userid">
                 <i-input v-model="shopaudit.userid" placeholder="用户登录的id唯一标识 "/>
+            </Form-item>
+            <Form-item label="身份证号" prop="idcard">
+                <i-input v-model="shopaudit.idcard" placeholder="身份证号"/>
+            </Form-item>
+            <Form-item label="身份证图片" prop="idcardimage">
+                <i-input v-model="shopaudit.idcardimage" placeholder="身份证图片"/>
+            </Form-item>
+            <Form-item label="店铺账号" prop="shopAccount">
+                <i-input v-model="shopaudit.shopAccount" placeholder="店铺账号"/>
+            </Form-item>
+            <Form-item label="店铺账号密码" prop="password">
+                <i-input v-model="shopaudit.password" placeholder="店铺账号密码"/>
             </Form-item>
             <Form-item>
                 <i-button type="primary" @click="handleSubmit('formValidate')">提交</i-button>

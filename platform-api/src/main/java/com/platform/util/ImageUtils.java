@@ -7,18 +7,15 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
-
 import javax.imageio.ImageIO;
-
 import java.awt.Image;
+
 import java.io.*;
 
 public class ImageUtils {
@@ -26,7 +23,6 @@ public class ImageUtils {
 	/**
      * 图片覆盖（覆盖图压缩到width*height大小，覆盖到底图上）
      *
-
      * @param x 起始x轴
      * @param y 起始y轴
      * @param width 覆盖宽度
@@ -90,7 +86,7 @@ public class ImageUtils {
     /**
      * 绘制文字
      * @param base
-//     * @param text
+     * @param text
      * @param x
      * @param y
      * @param codeUrl

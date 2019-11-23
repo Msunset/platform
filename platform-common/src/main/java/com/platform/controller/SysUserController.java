@@ -3,6 +3,8 @@ package com.platform.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.platform.entity.WalletEntity;
+import com.platform.service.WalletService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang.ArrayUtils;
@@ -44,6 +46,8 @@ public class SysUserController extends AbstractController {
     private SysUserService sysUserService;
     @Autowired
     private SysUserDao sysUserDao;
+    @Autowired
+    private WalletService walletService;
     
     @Autowired
     private SysUserRoleService sysUserRoleService;
@@ -148,6 +152,14 @@ public class SysUserController extends AbstractController {
         mlsUserVo.setMerchantId(user.getUserId());
         mlsUserVo.setAllShow(user.getAllShow());
         sysUserDao.insertMlsUse(mlsUserVo);
+        WalletEntity walletEntity = new WalletEntity();
+        walletEntity.setShopId(user.getUserId());
+        walletEntity.setShopName(user.getMerchantName());
+        walletEntity.setShopBalance(0);
+        walletEntity.setLoginName(user.getUsername());
+        walletService.save(walletEntity);
+
+
         return R.ok();
     }
 

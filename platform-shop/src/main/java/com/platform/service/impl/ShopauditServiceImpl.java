@@ -1,5 +1,6 @@
 package com.platform.service.impl;
 
+import com.platform.entity.example.ShopauditExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +44,8 @@ public class ShopauditServiceImpl implements ShopauditService {
     }
 
     @Override
-    public int update(ShopauditEntity shopaudit) {
+    public int update(ShopauditEntity shopaudit,Integer state) {
+        shopaudit.setState(state);
         return shopauditMapper.updateByPrimaryKeySelective(shopaudit);
     }
 
@@ -55,5 +57,28 @@ public class ShopauditServiceImpl implements ShopauditService {
     @Override
     public int deleteBatch(Integer[] ids) {
         return shopauditMapper.deleteBatch(ids);
+    }
+
+    @Override
+    public ShopauditEntity queryByUserId(String userId) {
+        ShopauditExample example = new ShopauditExample();
+        ShopauditExample.Criteria criteria = example.createCriteria();
+        criteria.andUseridEqualTo(userId);
+        List<ShopauditEntity> shopauditEntities = shopauditMapper.selectByExample(example);
+        if (shopauditEntities.size()==1){
+            return shopauditEntities.get(0);
+        }
+        return null;
+    }
+
+    @Override
+    public List<ShopauditEntity> findByShopName(String shopName) {
+        if ("".equals(shopName) || shopName == null){
+            return shopauditMapper.selectByExample(null);
+        }
+        ShopauditExample example = new ShopauditExample();
+        ShopauditExample.Criteria criteria = example.createCriteria();
+        criteria.andShopnameLike("%"+shopName+"%");
+       return shopauditMapper.selectByExample(example);
     }
 }

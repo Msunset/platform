@@ -75,13 +75,14 @@
             and brand_id = #{brand_id}
         </if>
         <if test="name != null and name != ''">
-            and 'name' like concat('%',#{keyword},'%')
+            and 'name' like concat('%',#{name},'%')
         </if>
         <if test="category_id != null and category_id != ''">
             and category_id = #{category_id}
         </if>
         <if test="keyword != null">
             and keywords like concat('%',#{keyword},'%')
+            or name like concat('%',#{name},'%')
         </if>
         <!--<if test="is_delete != null">
             and is_delete = #{is_delete}
@@ -113,7 +114,7 @@
             limit #{offset}, #{limit}
         </if>
     </select>
-
+    
     <select id="queryKillList" resultMap="goodsMap">
         SELECT * FROM nideshop_goods  WHERE is_secKill=2 and start_time &lt; NOW() AND end_time &gt; NOW()  order by ${sidx}  ${order}
     </select>
@@ -129,10 +130,10 @@
 		SELECT * FROM `nideshop_goods` WHERE brand_id=#{brand_id} and is_delete =0 and is_on_sale=1
 		 LIMIT 4
     </select>
-
+    
 
     <select id="queryHotGoodsList" resultMap="goodsMap">
-        /*  select a.*,b.id as product_id
+      /*  select a.*,b.id as product_id
         from nideshop_goods a
         left join nideshop_product b on a.id = b.goods_id
         left join nideshop_product c on a.id = c.goods_id and c.retail_price > b.retail_price and b.id != c.id
@@ -160,7 +161,7 @@
         <if test="keyword != null">
             and a.keywords like concat('%',#{keyword},'%')
         </if>
-        <if test="is_on_sale != null and is_on_sale != ''">
+         <if test="is_on_sale != null and is_on_sale != ''">
             and a.is_on_sale = #{is_on_sale}
         </if>
         <if test="categoryIds != null">
@@ -247,18 +248,18 @@
     </select>
 
     <select id="queryTotal" resultType="int">
-        select count(*) from nideshop_goods
-        where 1 = 1
+		select count(*) from nideshop_goods
+		where 1 = 1
         and is_delete = 0 and is_on_sale = 1
         <if test="is_hot != null and is_hot != ''">
             and is_hot = #{is_hot}
         </if>
-    </select>
+	</select>
 
     <select id="queryMaxId" resultType="java.lang.Integer" parameterType="map">
         SELECT MAX(id) FROM nideshop_goods
     </select>
-
+    
     <insert id="save" parameterType="com.platform.entity.GoodsVo">
         insert into nideshop_goods
         (
@@ -277,7 +278,7 @@
     </insert>
     <select id="queryFxList" resultMap="goodsMap">
         select
-        nideshop_goods.*,nideshop_brand.name as brand_name
+            nideshop_goods.*,nideshop_brand.name as brand_name
         from nideshop_goods ,nideshop_brand
         where 1 = 1 and  nideshop_goods.brand_id=nideshop_brand.id   and nideshop_goods.is_delete = 0 and nideshop_goods.is_on_sale = 1
         <if test="is_new != null and is_new != ''">
@@ -301,12 +302,12 @@
         <if test="merchantId != null ">
             and nideshop_goods.merchant_id=#{merchantId}
         </if>
-        <!--     <if test="is_delete != null">
-                 and nideshop_goods.is_delete = #{is_delete}
-             </if>
-             <if test="is_on_sale != null and is_on_sale != ''">
-                 and nideshop_goods.is_on_sale = #{is_on_sale}
-             </if>-->
+   <!--     <if test="is_delete != null">
+            and nideshop_goods.is_delete = #{is_delete}
+        </if>
+        <if test="is_on_sale != null and is_on_sale != ''">
+            and nideshop_goods.is_on_sale = #{is_on_sale}
+        </if>-->
         <if test="categoryIds != null">
             and nideshop_goods.category_id in
             <foreach item="item" collection="categoryIds" open="(" separator="," close=")">

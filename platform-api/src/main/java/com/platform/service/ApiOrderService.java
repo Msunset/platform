@@ -616,7 +616,7 @@ public class ApiOrderService {
 	}
 	private String[] getSpecificationIdsArray(String ids) {
 		String[] idsArray = null;
-		if (org.apache.commons.lang.StringUtils.isNotEmpty(ids)) {
+		if (StringUtils.isNotEmpty(ids)) {
 			String[] tempArray = ids.split("_");
 			if (null != tempArray && tempArray.length > 0) {
 				idsArray = tempArray;
