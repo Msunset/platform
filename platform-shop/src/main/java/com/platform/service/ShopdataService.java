@@ -1,6 +1,6 @@
 package com.platform.service;
 
-import com.platform.entity.ShopauditEntity;
+import com.platform.entity.ShopdataEntity;
 
 import java.util.List;
 import java.util.Map;
@@ -10,9 +10,9 @@ import java.util.Map;
  *
  * @author sunset
  * @email 1451795113@qq.com
- * @date 2019-11-19 15:53:32
+ * @date 2019-11-24 11:48:42
  */
-public interface ShopauditService {
+public interface ShopdataService {
 
     /**
      * 根据主键查询实体
@@ -20,7 +20,7 @@ public interface ShopauditService {
      * @param id 主键
      * @return 实体
      */
-    ShopauditEntity queryObject(Integer id);
+    ShopdataEntity queryObject(Integer id);
 
     /**
      * 分页查询
@@ -28,7 +28,7 @@ public interface ShopauditService {
      * @param map 参数
      * @return list
      */
-    List<ShopauditEntity> queryList(Map<String, Object> map);
+    List<ShopdataEntity> queryList(Map<String, Object> map);
 
     /**
      * 分页统计总数
@@ -41,18 +41,18 @@ public interface ShopauditService {
     /**
      * 保存实体
      *
-     * @param shopaudit 实体
+     * @param shopdata 实体
      * @return 保存条数
      */
-    int save(ShopauditEntity shopaudit);
+    int save(ShopdataEntity shopdata);
 
     /**
      * 根据主键更新实体
      *
-     * @param shopaudit 实体
+     * @param shopdata 实体
      * @return 更新条数
      */
-    int update(ShopauditEntity shopaudit,Integer state);
+    int update(ShopdataEntity shopdata);
 
     /**
      * 根据主键删除
@@ -69,25 +69,4 @@ public interface ShopauditService {
      * @return 删除条数
      */
     int deleteBatch(Integer[] ids);
-
-    /**
-     * 根据用户唯一标识查询
-     * @param userId
-     * @return
-     */
-    ShopauditEntity queryByUserId(String userId);
-
-    /**
-     * 根据商户名称查询
-     * @param shopName
-     * @return
-     */
-    List<ShopauditEntity> findByShopName(String shopName);
-
-    /**
-     * 根据商户的phone查询
-     * @param phone
-     * @return
-     */
-    List<ShopauditEntity> findByPhone(String phone);
 }

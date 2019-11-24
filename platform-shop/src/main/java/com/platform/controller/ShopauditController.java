@@ -1,10 +1,18 @@
 package com.platform.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.platform.dao.SysUserDao;
+import com.platform.entity.MlsUserEntity2;
+import com.platform.entity.ShopdataEntity;
+import com.platform.entity.SysUserEntity;
+import com.platform.service.SysUserService;
 import com.platform.utils.ResultState;
+import com.platform.validator.ValidatorUtils;
+import com.platform.validator.group.AddGroup;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +22,8 @@ import com.platform.service.ShopauditService;
 import com.platform.utils.PageUtils;
 import com.platform.utils.Query;
 import com.platform.utils.R;
+
+import static com.platform.utils.ShiroUtils.getUserId;
 
 /**
  * Controller
@@ -27,6 +37,10 @@ import com.platform.utils.R;
 public class ShopauditController {
     @Autowired
     private ShopauditService shopauditService;
+    @Autowired
+    private SysUserService sysUserService;
+    @Autowired
+    private SysUserDao sysUserDao;
 
     /**
      * 查看列表
@@ -84,6 +98,23 @@ public class ShopauditController {
         }
     }
 
+    /**
+     * 根据手机号查询商家
+     * @param phone
+     * @return
+     */
+    @RequestMapping("findByPhone")
+    //    @RequiresPermissions("shopaudit:findByPhone")
+    public ResultState findByPhone(@RequestParam(defaultValue = "") String phone){
+        try {
+            List<ShopauditEntity> shopauditEntities = shopauditService.findByPhone(phone);
+            return new ResultState("查询成功",true,ResultState.OK,shopauditEntities);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultState("查询失败",false,ResultState.ERROR);
+        }
+    }
+
 
 
 //    @RequestMapping("/updateState/{state}/{id}")
@@ -125,9 +156,40 @@ public class ShopauditController {
         System.out.printf(shopaudit.toString());
         try {
             shopauditService.update(shopaudit,state);
-            return new ResultState("审核成功",true,ResultState.OK);
+            //1.创建账号
+            if (state==1){//审核通过正常登陆
+            int count=sysUserDao.mlsUseCount(shopaudit.getPhone());
+            if(count>0) {
+                return new ResultState("手机号已经存在",false,ResultState.ERROR);
+            }
+            SysUserEntity user = new SysUserEntity();
+                user.setUsername(shopaudit.getShopAccount());//店铺账号
+                user.setPassword(shopaudit.getPassword());
+                user.setEmail(shopaudit.getEmail());
+                user.setMobile(shopaudit.getPhone());
+                user.setStatus(shopaudit.getState());
+                user.setCreateUserId(getUserId());//
+                user.setCreateTime(new Date());
+                sysUserService.save(user);
+                //把主键id设置到merchantId
+                sysUserDao.updateMerchantId(user);
+
+                //审核成功，把审核纪录的数据设置进来
+                ShopdataEntity shopdataEntity = new ShopdataEntity();
+                shopdataEntity.setAdminname(shopaudit.getAdminname());
+                shopdataEntity.setAptitude(shopaudit.getAptitude());
+                shopdataEntity.setBrand(shopaudit.getBrand());
+                shopdataEntity.setBusiness(shopaudit.getBusiness());
+                shopdataEntity.setIdcard(shopaudit.getIdcard());
+                shopdataEntity.setIdcardimage(shopaudit.getIdcardimage());
+                shopdataEntity.setType(shopaudit.getType());
+
+
+
+            }
+            return new ResultState("已更改审核状态",true,ResultState.OK);
         } catch (Exception e) {
-            return new ResultState("审核失败",false,ResultState.ERROR);
+            return new ResultState("更改审核状态失败",false,ResultState.ERROR);
         }
     }
 

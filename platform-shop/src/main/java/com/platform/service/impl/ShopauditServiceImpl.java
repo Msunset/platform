@@ -81,4 +81,13 @@ public class ShopauditServiceImpl implements ShopauditService {
         criteria.andShopnameLike("%"+shopName+"%");
        return shopauditMapper.selectByExample(example);
     }
+
+    @Override
+    public List<ShopauditEntity> findByPhone(String phone) {
+        ShopauditExample example = new ShopauditExample();
+        ShopauditExample.Criteria criteria = example.createCriteria();
+        criteria.andPhoneLike("%"+phone+"%");
+        return shopauditMapper.selectByExample(example);
+
+    }
 }

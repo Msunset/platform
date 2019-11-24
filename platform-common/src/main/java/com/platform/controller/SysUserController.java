@@ -11,6 +11,7 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import com.platform.annotation.SysLog;
@@ -38,6 +39,7 @@ import com.platform.validator.group.UpdateGroup;
  * @email 939961241@qq.com
  * @date 2016年10月31日 上午10:40:10
  */
+
 @RestController
 @RequestMapping("/sys/user")
 @Api("用户管理")
@@ -127,6 +129,7 @@ public class SysUserController extends AbstractController {
     /**
      * 保存用户
      */
+    @Transactional
     @SysLog("保存用户")
     @RequestMapping(value = "/save",method = RequestMethod.POST)
     @RequiresPermissions("sys:user:save")
@@ -140,7 +143,7 @@ public class SysUserController extends AbstractController {
         user.setCreateUserId(getUserId());
         sysUserService.save(user);
         sysUserDao.updateMerchantId(user);
-        
+
         MlsUserEntity2 mlsUserVo=new MlsUserEntity2();
         mlsUserVo.setUserTel(user.getMobile());
         mlsUserVo.setFx(user.getFx());
@@ -152,6 +155,7 @@ public class SysUserController extends AbstractController {
         mlsUserVo.setMerchantId(user.getUserId());
         mlsUserVo.setAllShow(user.getAllShow());
         sysUserDao.insertMlsUse(mlsUserVo);
+        //用户创建后创建钱包
         WalletEntity walletEntity = new WalletEntity();
         walletEntity.setShopId(user.getUserId());
         walletEntity.setShopName(user.getMerchantName());
