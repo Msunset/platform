@@ -12,4 +12,9 @@ import com.platform.entity.example.ShopauditExample;
  */
 public interface ShopauditMapper extends BaseMapper<ShopauditEntity, ShopauditExample> {
 
+    int selectMobile(String phone);
+
+    int selectShopAccount(String shopAccount);
+
+    int selectShopName(String shopName);
 }

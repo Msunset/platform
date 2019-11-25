@@ -145,7 +145,20 @@
 	</delete>
 		
 	<select id="mlsUseCount" resultType="int">
-        SELECT count(MLS_USER_ID) FROM MLS_USER  where USER_TEL=#{value} 
+        SELECT count(MLS_USER_ID) FROM MLS_USER  where USER_TEL=#{value}
+    </select>
+
+	<!--	判断sys_user手机号存不存-->
+	<select id="mlsPhoneCount" resultType="int">
+        SELECT count(USER_ID) FROM SYS_USER  where MOBILE=#{value}
+    </select>
+<!--	判断店铺名是否存在-->
+	<select id="mlsMerchantNameCount" resultType="int">
+        SELECT count(USER_ID) FROM SYS_USER  where MERCHANT_NAME=#{value}
+    </select>
+<!--	判断店铺名存不存在-->
+	<select id="mlsShopAccountCount" resultType="int">
+        SELECT count(USER_ID) FROM SYS_USER  where USERNAME=#{value}
     </select>
     <insert id="insertMlsUse" useGeneratedKeys="true" keyProperty="mlsUserId" >
         INSERT INTO MLS_USER (

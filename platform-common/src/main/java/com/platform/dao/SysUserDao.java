@@ -49,6 +49,9 @@ public interface SysUserDao extends BaseDao<SysUserEntity> {
     int updateMerchantId(SysUserEntity t);
     
     int mlsUseCount(String tel);
+    int mlsPhoneCount(String tel);
+    int mlsMerchantNameCount(String merchantName);
+    int mlsShopAccountCount(String shopAccount);
     void insertMlsUse(MlsUserEntity2 t);
     void updateMlsUse(MlsUserEntity2 t);
 }

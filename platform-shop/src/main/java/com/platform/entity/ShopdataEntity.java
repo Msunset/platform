@@ -9,7 +9,7 @@ import java.util.Date;
  *
  * @author sunset
  * @email 1451795113@qq.com
- * @date 2019-11-24 11:48:42
+ * @date 2019-11-25 13:19:42
  */
 public class ShopdataEntity implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -27,13 +27,13 @@ public class ShopdataEntity implements Serializable {
     //商铺管理者姓名
     private String adminname;
     //用户的唯一id
-    private Integer userid;
+    private String userid;
     //身份证号
     private String idcard;
     //身份证图片
     private String idcardimage;
     //商户id
-    private Integer shopId;
+    private Long shopId;
 
     /**
      * 设置：
@@ -116,14 +116,14 @@ public class ShopdataEntity implements Serializable {
     /**
      * 设置：用户的唯一id
      */
-    public void setUserid(Integer userid) {
+    public void setUserid(String userid) {
         this.userid = userid;
     }
 
     /**
      * 获取：用户的唯一id
      */
-    public Integer getUserid() {
+    public String getUserid() {
         return userid;
     }
     /**
@@ -155,14 +155,14 @@ public class ShopdataEntity implements Serializable {
     /**
      * 设置：商户id
      */
-    public void setShopId(Integer shopId) {
+    public void setShopId(Long shopId) {
         this.shopId = shopId;
     }
 
     /**
      * 获取：商户id
      */
-    public Integer getShopId() {
+    public Long getShopId() {
         return shopId;
     }
 }

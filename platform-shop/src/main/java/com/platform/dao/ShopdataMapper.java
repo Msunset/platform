@@ -8,7 +8,7 @@ import com.platform.entity.example.ShopdataExample;
  *
  * @author xuyang
  * @email 295640759@qq.com
- * @date 2019-11-24 11:48:42
+ * @date 2019-11-25 13:19:42
  */
 public interface ShopdataMapper extends BaseMapper<ShopdataEntity, ShopdataExample> {
 

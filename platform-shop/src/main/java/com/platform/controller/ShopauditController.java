@@ -1,15 +1,12 @@
 package com.platform.controller;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.platform.dao.SysUserDao;
-import com.platform.entity.MlsUserEntity2;
-import com.platform.entity.ShopdataEntity;
-import com.platform.entity.SysUserEntity;
+import com.platform.entity.*;
+import com.platform.service.ShopdataService;
 import com.platform.service.SysUserService;
+import com.platform.service.WalletService;
 import com.platform.utils.ResultState;
 import com.platform.validator.ValidatorUtils;
 import com.platform.validator.group.AddGroup;
@@ -17,7 +14,6 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.platform.entity.ShopauditEntity;
 import com.platform.service.ShopauditService;
 import com.platform.utils.PageUtils;
 import com.platform.utils.Query;
@@ -41,6 +37,10 @@ public class ShopauditController {
     private SysUserService sysUserService;
     @Autowired
     private SysUserDao sysUserDao;
+    @Autowired
+    private ShopdataService shopdataService;
+    @Autowired
+    private WalletService walletService;
 
     /**
      * 查看列表
@@ -141,11 +141,41 @@ public class ShopauditController {
      */
     @RequestMapping("/save")
 //    @RequiresPermissions("shopaudit:save")
-    public R save(@RequestBody ShopauditEntity shopaudit) {
-        shopauditService.save(shopaudit);
+    public ResultState save(@RequestBody ShopauditEntity shopaudit) {
+        ResultState exit = isExit(shopaudit);
 
-        return R.ok();
+
+        try {
+            if (exit==null){
+            shopauditService.save(shopaudit);
+            return new ResultState("申请成功",true,ResultState.OK);
+            }else {
+                return exit;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultState("数据异常",false,ResultState.ERROR);
+        }
+
     }
+
+    //判断是否重复
+    private ResultState isExit(ShopauditEntity shopAudit){
+        int count =sysUserDao.mlsPhoneCount(shopAudit.getPhone());
+        if(count>0) {
+            return new ResultState("手机号已经存在",false,ResultState.ERROR);
+        }
+        int shopNameCount = sysUserDao.mlsMerchantNameCount(shopAudit.getShopname());
+        if (shopNameCount>0){
+            return new ResultState("店铺名已经存在",false,ResultState.ERROR);
+        }
+        int shopAccountCount = sysUserDao.mlsShopAccountCount(shopAudit.getShopAccount());
+        if (shopAccountCount>0){
+            return new ResultState("店铺账号已经存在",false,ResultState.ERROR);
+        }
+        return null;
+
+    };
 
     /**
      * 根据主键修改商家审核状态
@@ -154,25 +184,43 @@ public class ShopauditController {
 //    @RequiresPermissions("shopaudit:update")
     public ResultState update(@RequestBody ShopauditEntity shopaudit,@RequestParam Integer state) {
         System.out.printf(shopaudit.toString());
-        try {
+
             shopauditService.update(shopaudit,state);
             //1.创建账号
             if (state==1){//审核通过正常登陆
-            int count=sysUserDao.mlsUseCount(shopaudit.getPhone());
-            if(count>0) {
-                return new ResultState("手机号已经存在",false,ResultState.ERROR);
-            }
-            SysUserEntity user = new SysUserEntity();
+
+                ResultState exit = isExit(shopaudit);
+                if (exit == null){
+//                int count=sysUserDao.mlsPhoneCount(shopaudit.getPhone());
+//                if(count>0) {
+//                    return new ResultState("手机号已经存在",false,ResultState.ERROR);
+//                }
+//                int shopNameCount = sysUserDao.mlsMerchantNameCount(shopaudit.getShopname());
+//                if (shopNameCount>0){
+//                    return new ResultState("店铺名已经存在",false,ResultState.ERROR);
+//                }
+//                int shopAccountCount = sysUserDao.mlsShopAccountCount(shopaudit.getShopAccount());
+//                if (shopAccountCount>0){
+//                    return new ResultState("店铺账号已经存在",false,ResultState.ERROR);
+//                }
+
+                SysUserEntity user = new SysUserEntity();
                 user.setUsername(shopaudit.getShopAccount());//店铺账号
                 user.setPassword(shopaudit.getPassword());
                 user.setEmail(shopaudit.getEmail());
                 user.setMobile(shopaudit.getPhone());
                 user.setStatus(shopaudit.getState());
-                user.setCreateUserId(getUserId());//
+                user.setCreateUserId((long)1);
+                user.setMerchantName(shopaudit.getShopname());
+                ArrayList<Long> roleIdList = new ArrayList<>();
+                roleIdList.add((long) 6);
+                user.setRoleIdList(roleIdList);
                 user.setCreateTime(new Date());
+                ValidatorUtils.validateEntity(user, AddGroup.class);
                 sysUserService.save(user);
                 //把主键id设置到merchantId
                 sysUserDao.updateMerchantId(user);
+                System.out.println(user);
 
                 //审核成功，把审核纪录的数据设置进来
                 ShopdataEntity shopdataEntity = new ShopdataEntity();
@@ -183,14 +231,24 @@ public class ShopauditController {
                 shopdataEntity.setIdcard(shopaudit.getIdcard());
                 shopdataEntity.setIdcardimage(shopaudit.getIdcardimage());
                 shopdataEntity.setType(shopaudit.getType());
+                shopdataEntity.setShopId(user.getUserId());
+                shopdataEntity.setUserid(shopaudit.getUserid());
+                shopdataService.save(shopdataEntity);
+                //用户创建后创建钱包
+                WalletEntity walletEntity = new WalletEntity();
+                walletEntity.setShopId(user.getUserId());
+                walletEntity.setShopName(user.getMerchantName());
+                walletEntity.setShopBalance(0);
+                walletEntity.setLoginName(user.getUsername());
+                walletService.save(walletEntity);
 
-
+                }else {
+                    return exit;
+                }
 
             }
             return new ResultState("已更改审核状态",true,ResultState.OK);
-        } catch (Exception e) {
-            return new ResultState("更改审核状态失败",false,ResultState.ERROR);
-        }
+
     }
 
     /**

@@ -40,6 +40,18 @@ public class ShopauditServiceImpl implements ShopauditService {
 
     @Override
     public int save(ShopauditEntity shopaudit) {
+        int mobile  = shopauditMapper.selectMobile(shopaudit.getPhone());
+        if (mobile>0){
+            return mobile;
+        }
+        int ShopAccount  = shopauditMapper.selectShopAccount(shopaudit.getShopAccount());
+        if (ShopAccount>0){
+            return ShopAccount;
+        }
+        int ShopName  = shopauditMapper.selectShopName(shopaudit.getShopname());
+        if (ShopName>0){
+            return ShopName;
+        }
         return shopauditMapper.insertSelective(shopaudit);
     }
 

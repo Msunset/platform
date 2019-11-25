@@ -111,6 +111,8 @@
         from nideshop_shopdata
         where id = #{id,jdbcType=BIGINT}
     </select>
+
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
         delete from nideshop_shopdata
         where id = #{id,jdbcType=BIGINT}
@@ -127,9 +129,8 @@
           #{id}
 </foreach>
     </delete>
-    <insert id="insert" parameterType="com.platform.entity.ShopdataEntity">
+    <insert id="insert" parameterType="com.platform.entity.ShopdataEntity" useGeneratedKeys="true" keyProperty="id">
 		insert into nideshop_shopdata(
-          `id`,
           `type`,
           `business`,
           `brand`,
@@ -140,7 +141,6 @@
           `idcardImage`,
           `shop_id`        )
 		values(
-          #{id},
           #{type},
           #{business},
           #{brand},
@@ -153,12 +153,9 @@
 	</insert>
 
 
-    <insert id="insertSelective" parameterType="com.platform.entity.ShopdataEntity">
+    <insert id="insertSelective" parameterType="com.platform.entity.ShopdataEntity" useGeneratedKeys="true" keyProperty="id">
         insert into nideshop_shopdata
         <trim prefix="(" suffix=")" suffixOverrides="," >
-          <if test="id != null">
-            `id`,
-          </if>
           <if test="type != null">
             `type`,
           </if>
@@ -188,9 +185,6 @@
           </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="id != null">
-              #{id},
-            </if>
             <if test="type != null">
               #{type},
             </if>

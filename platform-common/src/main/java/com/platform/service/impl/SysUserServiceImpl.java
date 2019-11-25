@@ -74,8 +74,9 @@ public class SysUserServiceImpl implements SysUserService {
     public void save(SysUserEntity user) {
         user.setCreateTime(new Date());
         //sha256加密
-        user.setPassword(new Sha256Hash(Constant.DEFAULT_PASS_WORD).toHex());
-        sysUserDao.save(user);
+        user.setPassword(new Sha256Hash(user.getPassword()).toHex());
+        int save = sysUserDao.save(user);
+        System.out.println(save);
 
         //检查角色是否越权
         checkRole(user);

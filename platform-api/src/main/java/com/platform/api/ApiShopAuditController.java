@@ -1,6 +1,7 @@
 package com.platform.api;
 
 import com.platform.dao.NideshopShopauditMapper;
+import com.platform.dao.SysUserDao;
 import com.platform.entity.NideshopShopaudit;
 import com.platform.entity.ShopauditEntity;
 import com.platform.service.ApiShopAuditService;
@@ -17,12 +18,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/audit")
 public class ApiShopAuditController {
     @Autowired
+    private SysUserDao sysUserDao;
+    @Autowired
     private ApiShopAuditService shopAuditService;
     @ApiOperation("商户添加")
     @PostMapping("/save")
     public ResultState saveShop(@RequestBody ShopauditEntity nideshopShopaudit){
         try {
+            ResultState exit = isExit(nideshopShopaudit);
+            if (exit==null){
             shopAuditService.save(nideshopShopaudit);
+            }else {
+                return exit;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultState("未知错误,联系管理员",false,ResultState.ERROR);
@@ -40,6 +48,23 @@ public class ApiShopAuditController {
         }
 
     }
+
+    private ResultState isExit(ShopauditEntity shopAudit){
+        int count =sysUserDao.mlsPhoneCount(shopAudit.getPhone());
+        if(count>0) {
+            return new ResultState("手机号已经存在",false,ResultState.ERROR);
+        }
+        int shopNameCount = sysUserDao.mlsMerchantNameCount(shopAudit.getShopname());
+        if (shopNameCount>0){
+            return new ResultState("店铺名已经存在",false,ResultState.ERROR);
+        }
+        int shopAccountCount = sysUserDao.mlsShopAccountCount(shopAudit.getShopAccount());
+        if (shopAccountCount>0){
+            return new ResultState("店铺账号已经存在",false,ResultState.ERROR);
+        }
+        return null;
+
+    };
 
 
 

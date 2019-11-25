@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author xuyang
  * @email 295640759@qq.com
- * @date 2019-11-24 11:48:42
+ * @date 2019-11-25 13:19:42
  */
 public class ShopdataExample extends AbstractExample  {
     private static final long serialVersionUID = 1L;
@@ -380,51 +380,60 @@ public class ShopdataExample extends AbstractExample  {
             return (Criteria) this;
         }
 
-        public Criteria andUseridEqualTo(Integer value) {
+        public Criteria andUseridEqualTo(String value) {
             addCriterion("userId =", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridNotEqualTo(Integer value) {
+        public Criteria andUseridNotEqualTo(String value) {
             addCriterion("userId <>", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridGreaterThan(Integer value) {
+        public Criteria andUseridGreaterThan(String value) {
             addCriterion("userId >", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridGreaterThanOrEqualTo(Integer value) {
+        public Criteria andUseridGreaterThanOrEqualTo(String value) {
             addCriterion("userId >=", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridLessThan(Integer value) {
+        public Criteria andUseridLessThan(String value) {
             addCriterion("userId <", value, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridLessThanOrEqualTo(Integer value) {
+        public Criteria andUseridLessThanOrEqualTo(String value) {
             addCriterion("userId <=", value, "userid");
             return (Criteria) this;
         }
-            public Criteria andUseridIn(List<Integer> values) {
+            public Criteria andUseridLike(String value) {
+            addCriterion("userId like", value, "userid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseridNotLike(String value) {
+            addCriterion("userId not like", value, "userid");
+            return (Criteria) this;
+        }
+            public Criteria andUseridIn(List<String> values) {
             addCriterion("userId in", values, "userid");
             return (Criteria) this;
         }
 
-        public Criteria anduseridNotIn(List<Integer> values) {
+        public Criteria anduseridNotIn(List<String> values) {
             addCriterion("userId not in", values, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridBetween(Integer value1, Integer value2) {
+        public Criteria andUseridBetween(String value1, String value2) {
             addCriterion("userId between", value1, value2, "userid");
             return (Criteria) this;
         }
 
-        public Criteria andUseridNotBetween(Integer value1, Integer value2) {
+        public Criteria andUseridNotBetween(String value1, String value2) {
             addCriterion("userId not between", value1, value2, "userid");
             return (Criteria) this;
         }
@@ -572,51 +581,51 @@ public class ShopdataExample extends AbstractExample  {
             return (Criteria) this;
         }
 
-        public Criteria andShopIdEqualTo(Integer value) {
+        public Criteria andShopIdEqualTo(Long value) {
             addCriterion("shop_id =", value, "shopId");
             return (Criteria) this;
         }
 
-        public Criteria andShopIdNotEqualTo(Integer value) {
+        public Criteria andShopIdNotEqualTo(Long value) {
             addCriterion("shop_id <>", value, "shopId");
             return (Criteria) this;
         }
 
-        public Criteria andShopIdGreaterThan(Integer value) {
+        public Criteria andShopIdGreaterThan(Long value) {
             addCriterion("shop_id >", value, "shopId");
             return (Criteria) this;
         }
 
-        public Criteria andShopIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andShopIdGreaterThanOrEqualTo(Long value) {
             addCriterion("shop_id >=", value, "shopId");
             return (Criteria) this;
         }
 
-        public Criteria andShopIdLessThan(Integer value) {
+        public Criteria andShopIdLessThan(Long value) {
             addCriterion("shop_id <", value, "shopId");
             return (Criteria) this;
         }
 
-        public Criteria andShopIdLessThanOrEqualTo(Integer value) {
+        public Criteria andShopIdLessThanOrEqualTo(Long value) {
             addCriterion("shop_id <=", value, "shopId");
             return (Criteria) this;
         }
-            public Criteria andShopIdIn(List<Integer> values) {
+            public Criteria andShopIdIn(List<Long> values) {
             addCriterion("shop_id in", values, "shopId");
             return (Criteria) this;
         }
 
-        public Criteria andshopIdNotIn(List<Integer> values) {
+        public Criteria andshopIdNotIn(List<Long> values) {
             addCriterion("shop_id not in", values, "shopId");
             return (Criteria) this;
         }
 
-        public Criteria andShopIdBetween(Integer value1, Integer value2) {
+        public Criteria andShopIdBetween(Long value1, Long value2) {
             addCriterion("shop_id between", value1, value2, "shopId");
             return (Criteria) this;
         }
 
-        public Criteria andShopIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andShopIdNotBetween(Long value1, Long value2) {
             addCriterion("shop_id not between", value1, value2, "shopId");
             return (Criteria) this;
         }
