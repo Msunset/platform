@@ -556,8 +556,6 @@ public class ApiGoodsController extends ApiBaseAction {
                        @RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "size", defaultValue = "10") Integer size,
                        String sort, String order) {
         Map params = new HashMap();
-        params.put("is_delete", 0);
-        params.put("is_on_sale", 1);
         params.put("brand_id", brandId);
         params.put("keyword", keyword);
         params.put("is_new", isNew);
@@ -566,7 +564,6 @@ public class ApiGoodsController extends ApiBaseAction {
         params.put("limit", size);
         params.put("order", sort);
         params.put("sidx", order);
-        params.put("name", keyword);
         //
         if (null != sort && sort.equals("price")) {
             params.put("sidx", "retail_price");

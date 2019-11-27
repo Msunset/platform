@@ -81,8 +81,7 @@
             and category_id = #{category_id}
         </if>
         <if test="keyword != null">
-            and keywords like concat('%',#{keyword},'%')
-            or name like concat('%',#{name},'%')
+            and name like concat('%',#{keyword},'%')
         </if>
         <!--<if test="is_delete != null">
             and is_delete = #{is_delete}

@@ -49,17 +49,20 @@ public class Test2Task {
     public void invalidOrderTask(String params) {
         logger.info("luckDrawTask======我是不带参数的test3方法，正在被执行");
         List<OrderGoodsVo> ordergoods = orderGoodsService.queryInvalidOrder();
+		System.out.println(ordergoods);
         for(OrderGoodsVo o : ordergoods) {
-        	
         	ProductVo product = productService.queryObject(o.getProduct_id());
+			System.out.println(product.getGoods_number());
         	product.setGoods_number(product.getGoods_number() + o.getNumber());
+
         	productService.update(product);
-        	
+
         	OrderVo order = orderService.queryObject(o.getOrder_id());
         	order.setOrder_status(103);
         	orderService.update(order);
         }
     }
+
     
     //每天凌晨0点执行清空每日销售额
     public void updateTodaySalesTask() {

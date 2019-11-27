@@ -437,55 +437,55 @@ public class ApiPayController extends ApiBaseAction {
         }
     }
 
-//    /**
-//     * 订单退款请求（暂无使用）
-//     */
-//    @ApiOperation(value = "订单退款请求")
-//    @PostMapping("refund")
-//    public Object refund(Integer orderId) {
-//    	
-//    	
-//        OrderVo orderInfo = orderService.queryObject(orderId);
-//
-//        if (null == orderInfo) {
-//            return toResponsObject(400, "订单已取消", "");
-//        }
-//
-//        if (orderInfo.getOrder_status() == 401 || orderInfo.getOrder_status() == 402) {
-//            return toResponsObject(400, "订单已退款", "");
-//        }
-//
-//        if (orderInfo.getPay_status() != 2) {
-//            return toResponsObject(400, "订单未付款，不能退款", "");
-//        }
-//
-//		WechatRefundApiResult result = WechatUtil.wxRefund(orderInfo.getAll_order_id().toString(),
-//				orderInfo.getAll_price().doubleValue(), orderInfo.getAll_price().doubleValue());
-//        if (result.getResult_code().equals("SUCCESS")) {
-//            if (orderInfo.getOrder_status() == 201) {
-//                orderInfo.setOrder_status(401);
-//            } else if (orderInfo.getOrder_status() == 300) {
-//                orderInfo.setOrder_status(402);
-//            }
-//            
-//            //修改订单状态
-//            OrderVo neworderInfo = new OrderVo();
-//            neworderInfo.setAll_order_id(orderInfo.getAll_order_id());
-//            neworderInfo.setOrder_status(orderInfo.getOrder_status());
-//            orderService.updateStatus(orderInfo);
-//            
-//            //还原优惠券使用状态
+    /**
+     * 订单退款请求（暂无使用）
+     */
+    @ApiOperation(value = "订单退款请求")
+    @PostMapping("refund")
+    public Object refund(Integer orderId) {
+
+
+        OrderVo orderInfo = orderService.queryObject(orderId);
+
+        if (null == orderInfo) {
+            return toResponsObject(400, "订单已取消", "");
+        }
+
+        if (orderInfo.getOrder_status() == 401 || orderInfo.getOrder_status() == 402) {
+            return toResponsObject(400, "订单已退款", "");
+        }
+
+        if (orderInfo.getPay_status() != 2) {
+            return toResponsObject(400, "订单未付款，不能退款", "");
+        }
+
+		WechatRefundApiResult result = WechatUtil.wxRefund(orderInfo.getAll_order_id().toString(),
+				orderInfo.getAll_price().doubleValue(), orderInfo.getAll_price().doubleValue());
+        if (result.getResult_code().equals("SUCCESS")) {
+            if (orderInfo.getOrder_status() == 201) {
+                orderInfo.setOrder_status(401);
+            } else if (orderInfo.getOrder_status() == 300) {
+                orderInfo.setOrder_status(402);
+            }
+
+            //修改订单状态
+            OrderVo neworderInfo = new OrderVo();
+            neworderInfo.setAll_order_id(orderInfo.getAll_order_id());
+            neworderInfo.setOrder_status(orderInfo.getOrder_status());
+            orderService.updateStatus(orderInfo);
+
+            //还原优惠券使用状态
 //			UserCouponVo uc = new UserCouponVo();
 //			uc.setId(orderInfo.getCoupon_id());
 //			uc.setCoupon_status(1);
 //			uc.setUsed_time(null);
 //			userCouponService.updateCouponStatus(uc);
-//            
-//            return toResponsObject(400, "成功退款", "");
-//        } else {
-//            return toResponsObject(400, "退款失败", "");
-//        }
-//    }
+
+            return toResponsObject(400, "成功退款", "");
+        } else {
+            return toResponsObject(400, "退款失败", "");
+        }
+    }
 
 
     //返回微信服务
@@ -503,7 +503,6 @@ public class ApiPayController extends ApiBaseAction {
      * 计算分润
      * @param userId		用户Id
      * @param fx_money		分销的分润金额
-     * @param order_price	订单金额
      * @param orderId		订单ID
      */
     @ApiOperation(value = "微信订单回调接口")
