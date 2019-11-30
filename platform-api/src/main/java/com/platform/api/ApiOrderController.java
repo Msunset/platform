@@ -2,10 +2,7 @@ package com.platform.api;
 
 import com.platform.annotation.IgnoreAuth;
 import com.platform.annotation.LoginUser;
-import com.platform.entity.OrderGoodsVo;
-import com.platform.entity.OrderVo;
-import com.platform.entity.UserCouponVo;
-import com.platform.entity.UserVo;
+import com.platform.entity.*;
 import com.platform.service.*;
 import com.platform.util.ApiBaseAction;
 import com.platform.util.ApiPageUtils;
@@ -44,6 +41,8 @@ public class ApiOrderController extends ApiBaseAction {
     private MlsUserSer mlsUserSer;
     @Autowired
     private ApiUserCouponService userCouponService;
+    @Autowired
+    private ApiProductService productService;
 
     /**
      */
@@ -71,6 +70,7 @@ public class ApiOrderController extends ApiBaseAction {
         params.put("sidx", "id");
         params.put("order", "desc");
         params.put("order_status", order_status);
+        params.put("order_statesVo",103);
         //查询列表数据
         Query query = new Query(params);
         List<OrderVo> orderEntityList = orderService.queryList(query);
@@ -179,6 +179,8 @@ public class ApiOrderController extends ApiBaseAction {
             OrderVo orderVo = orderService.queryObject(orderId);
             
             List<OrderVo> orders = orderService.queryByAllOrderId(orderVo.getAll_order_id());
+            //根据订单号查询出订单数量number和订单goods_id
+           OrderGoodsVo orderGoods =  orderGoodsService.queryOrderByOrderId(orderId);
             
             BigDecimal allPrice = BigDecimal.ZERO;
             for(OrderVo o : orders) {
@@ -229,6 +231,12 @@ public class ApiOrderController extends ApiBaseAction {
             } else {
                 orderVo.setOrder_status(101);
                 orderService.update(orderVo);
+                //释放取消订单的数量
+                Integer productId = orderGoods.getProduct_id();
+                //拿到product表所有数据
+                ProductVo product = productService.queryObject(productId);
+                product.setGoods_number(product.getGoods_number() + orderGoods.getNumber());
+                productService.update(product);
                 return toResponsSuccess("取消成功");
             }
         } catch (Exception e) {

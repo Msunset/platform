@@ -36,7 +36,7 @@ public class ShopauditController {
     @Autowired
     private SysUserService sysUserService;
     @Autowired
-    private SysUserDao sysUserDao;
+    private SysUserDao sysUserDao   ;
     @Autowired
     private ShopdataService shopdataService;
     @Autowired

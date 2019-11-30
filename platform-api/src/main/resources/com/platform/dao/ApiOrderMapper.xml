@@ -59,7 +59,8 @@
 		left join nideshop_shipping b on a.shipping_id = b.id
 		where a.id = #{value}
 	</select>
-	
+
+
 	<select id="queryByAllOrderId" resultMap="orderMap">
 		select *
 		from nideshop_order
@@ -88,7 +89,7 @@
 	        </if>
 	        
 	        <if test="order_status != null and order_status == 101">
-	            AND (o.order_status = 101 or o.order_status = 401 or o.order_status = 402)
+	            AND (o.order_status = 101 or o.order_status = 401 or o.order_status = 402 or o.order_status = 103)
 	        </if>
 	        
 	        <if test="order_status != null and order_status == 201">

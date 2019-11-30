@@ -57,4 +57,7 @@ public class ApiOrderGoodsService {
     	return orderGoodsDao.queryInvalidOrder();
     }
 
+    public OrderGoodsVo queryOrderByOrderId(Integer orderId) {
+        return orderGoodsDao.queryOrderByOrderId(orderId);
+    }
 }

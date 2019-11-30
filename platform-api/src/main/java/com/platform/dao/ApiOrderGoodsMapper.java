@@ -14,4 +14,6 @@ import com.platform.entity.OrderVo;
  */
 public interface ApiOrderGoodsMapper extends BaseDao<OrderGoodsVo> {
 	List<OrderGoodsVo> queryInvalidOrder();
+
+    OrderGoodsVo queryOrderByOrderId(Integer orderId);
 }

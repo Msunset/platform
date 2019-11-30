@@ -93,12 +93,10 @@ public class SysUserController extends AbstractController {
             throw new RRException("演示环境无法修改密码！");
         }
         Assert.isBlank(newPassword, "新密码不为能空");
-
         //sha256加密
         password = new Sha256Hash(password).toHex();
         //sha256加密
         newPassword = new Sha256Hash(newPassword).toHex();
-
         //更新密码
         int count = sysUserService.updatePassword(getUserId(), password, newPassword);
         if (count == 0) {

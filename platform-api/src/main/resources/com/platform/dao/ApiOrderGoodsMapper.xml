@@ -51,6 +51,12 @@
         </if>
     </select>
 
+    <select id="queryOrderByOrderId" resultMap="orderGoodsMap">
+		select *
+        from nideshop_order_goods a
+        WHERE a.order_id=#{value}
+	</select>
+
     <select id="queryTotal" resultType="int">
 		select count(*) from nideshop_order_goods 
 	</select>
@@ -59,7 +65,7 @@
 	
 	<select id="queryInvalidOrder" resultMap="orderGoodsMap">
 		SELECT og.* FROM `nideshop_order` o LEFT JOIN `nideshop_order_goods` og 
-		ON o.id=og.order_id WHERE 1=1 AND o.add_time &lt;NOW()+80000-100 AND o.order_status=0
+		ON o.id=og.order_id WHERE 1=1 AND o.add_time &lt;NOW()-60000 AND o.order_status=0
 	</select>
 
     <insert id="save" parameterType="com.platform.entity.OrderGoodsVo" useGeneratedKeys="true" keyProperty="id">
