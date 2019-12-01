@@ -224,9 +224,15 @@ public class ApiOrderController extends ApiBaseAction {
                     	e.printStackTrace();
                     	System.out.println("================取消订单返还分润开始================");
                     }
+                    //释放取消订单的数量
+                    Integer productId = orderGoods.getProduct_id();
+                    //拿到product表所有数据
+                    ProductVo product = productService.queryObject(productId);
+                    product.setGoods_number(product.getGoods_number() + orderGoods.getNumber());
+                    productService.update(product);
                     return toResponsSuccess("取消成功");
                 } else {
-                    return toResponsObject(400, "取消成失败", "取消成失败");
+                    return toResponsObject(400, "取消失败", "取消失败");
                 }
             } else {
                 orderVo.setOrder_status(101);

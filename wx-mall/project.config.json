@@ -9,8 +9,10 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "1.9.0",
-	"appid": "wx213d7c88ef38d750",
+	"appid": "wxd906a683f345c322",
 	"projectname": "hz-mall",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,

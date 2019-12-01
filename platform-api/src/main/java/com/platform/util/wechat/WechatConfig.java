@@ -5,6 +5,7 @@ import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLContexts;
 
 import javax.net.ssl.SSLContext;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.security.KeyStore;
 
@@ -24,7 +25,9 @@ public class WechatConfig {
         try {
             KeyStore keyStore = KeyStore.getInstance("PKCS12");
             Thread.currentThread().getContextClassLoader();
-            InputStream instream = new WechatRefundApiResult().getClass().getResourceAsStream(ResourceUtil.getConfigByName("wx.certName"));
+            String absolutePath = Thread.currentThread().getContextClassLoader().getResource("cert/apiclient_cert.p12").getFile();
+//            InputStream instream = new WechatRefundApiResult().getClass().getResourceAsStream(ResourceUtil.getConfigByName("wx.certName"));
+            InputStream instream = new FileInputStream(absolutePath);
             try {
                 keyStore.load(instream, ResourceUtil.getConfigByName("wx.mchId").toCharArray());
             } finally {
