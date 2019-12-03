@@ -7,8 +7,8 @@ $(function () {
     $("#jqGrid").Grid({
         url: url,
         colModel: [
-            {label: 'id', name: 'id', index: 'id', key: true, hidden: true},
-            {label: '商品', name: 'goodsName', index: 'goods_id', width: 120},
+            { label: 'id', name: 'id', index: 'id', key: true, hidden: true },
+            { label: '商品', name: 'goodsName', index: 'goods_id', width: 120 },
             {
                 label: '商品规格',
                 name: 'specificationValue',
@@ -18,12 +18,12 @@ $(function () {
                     return value.replace(row.goodsName + " ", '');
                 }
             },
-            {label: '商品序列号', name: 'goodsSn', index: 'goods_sn', width: 80},
-            {label: '商品库存', name: 'goodsNumber', index: 'goods_number', width: 80},
-            {label: '零售价格(元)', name: 'retailPrice', index: 'retail_price', width: 80},
-            {label: '市场价格(元)', name: 'marketPrice', index: 'market_price', width: 80},
-            {label: '团购价格(元)', name: 'groupPrice', index: 'group_price', width: 80}
-            ]
+            { label: '商品序列号', name: 'goodsSn', index: 'goods_sn', width: 80 },
+            { label: '商品库存', name: 'goodsNumber', index: 'goods_number', width: 80 },
+            { label: '零售价格(元)', name: 'retailPrice', index: 'retail_price', width: 80 },
+            { label: '市场价格(元)', name: 'marketPrice', index: 'market_price', width: 80 },
+            { label: '团购价格(元)', name: 'groupPrice', index: 'group_price', width: 80 }
+        ]
     });
 });
 
@@ -35,7 +35,7 @@ let vm = new Vue({
         product: {},
         ruleValidate: {
             name: [
-                {required: true, message: '名称不能为空', trigger: 'blur'}
+                { required: true, message: '名称不能为空', trigger: 'blur' }
             ]
         },
         q: {
@@ -45,13 +45,13 @@ let vm = new Vue({
         attribute: [],
         specifications: [],
         type: '',
-        goodsId:0,
-        ggArr:[],
-        isSecKill:1,
-        params:[
-            { param : [] , ggArr:[]},
-            { param : [] , ggArr:[]},
-            { param : [] , ggArr:[]}
+        goodsId: 0,
+        ggArr: [],
+        isSecKill: 1,
+        params: [
+            { param: [], ggArr: [] },
+            { param: [], ggArr: [] },
+            { param: [], ggArr: [] }
         ]
     },
     methods: {
@@ -61,7 +61,7 @@ let vm = new Vue({
         add: function () {
             vm.showList = false;
             vm.title = "新增";
-            vm.product = {groupPrice:0};
+            vm.product = { groupPrice: 0 };
             vm.getGoodss();
             vm.type = 'add';
         },
@@ -77,42 +77,42 @@ let vm = new Vue({
             vm.getInfo(id)
         },
         changeGoods: function (opt) {
-            let model= opt.value
+            let model = opt.value
             vm.goodsId = model.id;
             if (vm.type == 'add') {
                 vm.product.goodsSn = model.goodsSn;
                 vm.product.goodsNumber = model.goodsNumber;
                 vm.product.retailPrice = model.retailPrice;
                 vm.product.marketPrice = model.marketPrice;
-                vm.product.id=null;
+                vm.product.id = null;
             }
-            if(!vm.goodsId)return;
+            if (!vm.goodsId) return;
 
             Ajax.request({
-                url: "../specification/queryListByGoodsId?goodsId="+vm.goodsId,
+                url: "../specification/queryListByGoodsId?goodsId=" + vm.goodsId,
                 async: true,
                 successCallback: function (r) {
-                    vm.specifications= r.list;
+                    vm.specifications = r.list;
                 }
             });
-            vm.isSecKill=model.isSecKill;
+            vm.isSecKill = model.isSecKill;
         },
         saveOrUpdate: function (event) {
-            if(vm.attribute.length>2){
+            if (vm.attribute.length > 2) {
                 alert('属性最多选择两项');
                 return false;
             }
             let url = vm.product.id == null ? "../product/save" : "../product/update";
-            if(vm.attribute.length<=1){
-                vm.product.goodsSpecificationIds = vm.params[0].param+'_';
-            }else if(vm.attribute.length<=2){
-                vm.product.goodsSpecificationIds = vm.params[0].param + '_' + vm.params[1].param ;
-            }else if(vm.attribute.length<=3){
+            if (vm.attribute.length <= 1) {
+                vm.product.goodsSpecificationIds = vm.params[0].param + '_';
+            } else if (vm.attribute.length <= 2) {
+                vm.product.goodsSpecificationIds = vm.params[0].param + '_' + vm.params[1].param;
+            } else if (vm.attribute.length <= 3) {
                 vm.product.goodsSpecificationIds = vm.params[0].param + '_' + vm.params[1].param + '_' + vm.params[2].param;
-            }else{
-                vm.product.goodsSpecificationIds='';
+            } else {
+                vm.product.goodsSpecificationIds = '';
             }
-            vm.product.goodsId=vm.goodsId;
+            vm.product.goodsId = vm.goodsId;
             Ajax.request({
                 type: "POST",
                 url: url,
@@ -121,16 +121,16 @@ let vm = new Vue({
                 successCallback: function (r) {
                     alert('操作成功', function (index) {
                         vm.reload();
-                        vm.product.goodsId=0;
+                        vm.product.goodsId = 0;
                         vm.product.goodsSn = '';
                         vm.product.goodsNumber = 1;
                         vm.product.retailPrice = 1;
                         vm.product.marketPrice = 1;
-                        vm.product.goodsSpecificationIds='';
-                        vm.params=[
-                            { param : [] , ggArr:[]},
-                            { param : [] , ggArr:[]},
-                            { param : [] , ggArr:[]}
+                        vm.product.goodsSpecificationIds = '';
+                        vm.params = [
+                            { param: [], ggArr: [] },
+                            { param: [], ggArr: [] },
+                            { param: [], ggArr: [] }
                         ]
                     });
                 }
@@ -168,11 +168,11 @@ let vm = new Vue({
                 successCallback: function (r) {
                     vm.getGoodss();
                     vm.product = r.product;
-                    vm.goodsId=r.product.goodsId;
-                    if(vm.product.goodsSpecificationIds.indexOf('_')>0){
+                    vm.goodsId = r.product.goodsId;
+                    if (vm.product.goodsSpecificationIds.indexOf('_') > 0) {
                         let goodsSpecificationIds = vm.product.goodsSpecificationIds.split("_");
                         goodsSpecificationIds.forEach((goodsSpecificationId, index) => {
-                            if(goodsSpecificationId.indexOf(',')>0){
+                            if (goodsSpecificationId.indexOf(',') > 0) {
                                 let specificationIds = goodsSpecificationId.split(",").filter(id => !!id).map(id => Number(id));
                                 if (index == 0) {
                                     vm.params[index].param = specificationIds;
@@ -190,12 +190,12 @@ let vm = new Vue({
                                         vm.attribute.push(4);
                                     }
                                 }
-                            }else {
-                               vm.params[index].param=vm.product.goodsSpecificationId
+                            } else {
+                                vm.params[index].param = vm.product.goodsSpecificationId
                             }
-                      });
-                    } else{
-                        vm.params[0].param=vm.product.goodsSpecificationIds
+                        });
+                    } else {
+                        vm.params[0].param = vm.product.goodsSpecificationIds
                     }
                 }
             });
@@ -204,7 +204,7 @@ let vm = new Vue({
             vm.showList = true;
             let page = $("#jqGrid").jqGrid('getGridParam', 'page');
             $("#jqGrid").jqGrid('setGridParam', {
-                postData: {'goodsName': vm.q.goodsName},
+                postData: { 'goodsName': vm.q.goodsName },
                 page: page
             }).trigger("reloadGrid");
             vm.handleReset('formValidate');
@@ -225,15 +225,15 @@ let vm = new Vue({
                     vm.goodss = r.list;
                 }
             });
-            
-           
+
+
         },
-        changeAttributes: function(){
+        changeAttributes: function () {
             Ajax.request({
-                url: "../goodsspecification/queryAll?goodsId=" + vm.goodsId + "&specificationId=" + vm.attribute[vm.attribute.length-1].id,
+                url: "../goodsspecification/queryAll?goodsId=" + vm.goodsId + "&specificationId=" + vm.attribute[vm.attribute.length - 1].id,
                 async: true,
                 successCallback: function (r) {
-                    vm.params[vm.attribute.length-1].ggArr = r.list;
+                    vm.params[vm.attribute.length - 1].ggArr = r.list;
                 }
             });
         }

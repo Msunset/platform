@@ -74,7 +74,12 @@ public class SysUserServiceImpl implements SysUserService {
     public void save(SysUserEntity user) {
         user.setCreateTime(new Date());
         //sha256加密
-        user.setPassword(new Sha256Hash(user.getPassword()).toHex());
+        if (user.getPassword() == null || "".equals(user.getPassword())){
+            user.setPassword(new Sha256Hash(Constant.DEFAULT_PASS_WORD).toHex());
+
+        }else {
+            user.setPassword(new Sha256Hash(user.getPassword()).toHex());
+        }
         int save = sysUserDao.save(user);
         System.out.println(save);
 

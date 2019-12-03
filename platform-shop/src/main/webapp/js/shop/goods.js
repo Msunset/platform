@@ -90,6 +90,9 @@ var vm = new Vue({
         ruleValidate: {
             name: [
                 {required: true, message: '名称不能为空', trigger: 'blur'}
+            ],
+            attributeCategoryName:[
+                {required: true, message: '类别不能为空', trigger: 'blur'}
             ]
         },
         q: {

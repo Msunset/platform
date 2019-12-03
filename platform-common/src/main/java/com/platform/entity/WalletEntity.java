@@ -1,6 +1,7 @@
 package com.platform.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Date;
  *
  * @author sunset
  * @email 1451795113@qq.com
- * @date 2019-11-21 16:15:09
+ * @date 2019-12-03 11:13:19
  */
 public class WalletEntity implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -21,7 +22,7 @@ public class WalletEntity implements Serializable {
     //商铺名称
     private String shopName;
     //商铺余额
-    private Integer shopBalance;
+    private BigDecimal shopBalance;
     //结算方式
     private String shopType;
     //登录名
@@ -69,14 +70,14 @@ public class WalletEntity implements Serializable {
     /**
      * 设置：商铺余额
      */
-    public void setShopBalance(Integer shopBalance) {
+    public void setShopBalance(BigDecimal shopBalance) {
         this.shopBalance = shopBalance;
     }
 
     /**
      * 获取：商铺余额
      */
-    public Integer getShopBalance() {
+    public BigDecimal getShopBalance() {
         return shopBalance;
     }
     /**

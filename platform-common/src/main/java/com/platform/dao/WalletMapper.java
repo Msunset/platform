@@ -8,8 +8,9 @@ import com.platform.entity.example.WalletExample;
  *
  * @author xuyang
  * @email 295640759@qq.com
- * @date 2019-11-21 16:15:09
+ * @date 2019-12-03 11:13:19
  */
 public interface WalletMapper extends BaseMapper<WalletEntity, WalletExample> {
+    WalletEntity findByShopId(Integer merchant_id);
 
 }

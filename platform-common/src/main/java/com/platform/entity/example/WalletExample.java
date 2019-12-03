@@ -1,6 +1,7 @@
 package com.platform.entity.example;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  *
  * @author xuyang
  * @email 295640759@qq.com
- * @date 2019-11-21 16:15:09
+ * @date 2019-12-03 11:13:19
  */
 public class WalletExample extends AbstractExample  {
     private static final long serialVersionUID = 1L;
@@ -170,51 +171,51 @@ public class WalletExample extends AbstractExample  {
             return (Criteria) this;
         }
 
-        public Criteria andShopBalanceEqualTo(Integer value) {
+        public Criteria andShopBalanceEqualTo(BigDecimal value) {
             addCriterion("shop_balance =", value, "shopBalance");
             return (Criteria) this;
         }
 
-        public Criteria andShopBalanceNotEqualTo(Integer value) {
+        public Criteria andShopBalanceNotEqualTo(BigDecimal value) {
             addCriterion("shop_balance <>", value, "shopBalance");
             return (Criteria) this;
         }
 
-        public Criteria andShopBalanceGreaterThan(Integer value) {
+        public Criteria andShopBalanceGreaterThan(BigDecimal value) {
             addCriterion("shop_balance >", value, "shopBalance");
             return (Criteria) this;
         }
 
-        public Criteria andShopBalanceGreaterThanOrEqualTo(Integer value) {
+        public Criteria andShopBalanceGreaterThanOrEqualTo(BigDecimal value) {
             addCriterion("shop_balance >=", value, "shopBalance");
             return (Criteria) this;
         }
 
-        public Criteria andShopBalanceLessThan(Integer value) {
+        public Criteria andShopBalanceLessThan(BigDecimal value) {
             addCriterion("shop_balance <", value, "shopBalance");
             return (Criteria) this;
         }
 
-        public Criteria andShopBalanceLessThanOrEqualTo(Integer value) {
+        public Criteria andShopBalanceLessThanOrEqualTo(BigDecimal value) {
             addCriterion("shop_balance <=", value, "shopBalance");
             return (Criteria) this;
         }
-            public Criteria andShopBalanceIn(List<Integer> values) {
+            public Criteria andShopBalanceIn(List<BigDecimal> values) {
             addCriterion("shop_balance in", values, "shopBalance");
             return (Criteria) this;
         }
 
-        public Criteria andshopBalanceNotIn(List<Integer> values) {
+        public Criteria andshopBalanceNotIn(List<BigDecimal> values) {
             addCriterion("shop_balance not in", values, "shopBalance");
             return (Criteria) this;
         }
 
-        public Criteria andShopBalanceBetween(Integer value1, Integer value2) {
+        public Criteria andShopBalanceBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("shop_balance between", value1, value2, "shopBalance");
             return (Criteria) this;
         }
 
-        public Criteria andShopBalanceNotBetween(Integer value1, Integer value2) {
+        public Criteria andShopBalanceNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("shop_balance not between", value1, value2, "shopBalance");
             return (Criteria) this;
         }

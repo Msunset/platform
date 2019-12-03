@@ -275,6 +275,17 @@
             limit #{offset}, #{limit}
         </if>
     </select>
+    <select id="findByShopId" resultType="com.platform.entity.WalletEntity">
+        SELECT
+          `id`,
+          `shop_id`,
+          `shop_name`,
+          `shop_balance`,
+          `shop_type`,
+          `login_name`
+          FROM nideshop_wallet nw WHERE nw.shop_id = #{shop_id}
+
+    </select>
 
     <select id="queryTotal" resultType="int">
         select count(*) from nideshop_wallet

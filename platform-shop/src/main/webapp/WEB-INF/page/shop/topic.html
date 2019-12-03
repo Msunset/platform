@@ -10,7 +10,7 @@
         <Row :gutter="16">
             <div class="search-group">
                 <i-col span="4">
-                    <i-input v-model="q.title" @on-enter="query" placeholder="活动主题"/>
+                    <i-input v-model="q.title" @on-enter="query" placeholder="专题名称"/>
                 </i-col>
                 <i-button @click="query">查询</i-button>
             </div>
@@ -34,13 +34,39 @@
         <div id="edit"></div>
         <p slot="title">{{title}}</p>
         <i-form ref="formValidate" :model="topic" :rules="ruleValidate" :label-width="100">
-            <Form-item label="活动主题" prop="title">
-                <i-input v-model="topic.title" placeholder="活动主题"/>
-            </Form-item>
-            <Form-item label="活动内容" prop="content">
-                <div id="content" placeholder="活动内容"></div>
+            <Form-item label="专题名称" prop="title">
+                <i-input v-model="topic.title" placeholder="专题名称"/> 
             </Form-item>
             <Row>
+                <i-col span="16">
+                    <Form-item label="列表页封面" prop="scenePicUrl">
+                        <i-input value="1" v-model="topic.scenePicUrl" placeholder="列表页封面" readonly/>
+                    </Form-item>
+                </i-col>
+                <i-col span="3">
+                    <Form-item :label-width="1">
+                        <Upload style="width: 300px;" action="../sys/oss/upload" :format="['jpg','jpeg','png']"
+                                max-size="2048"
+                                :on-success="handleSuccessScenePicUrl" :on-format-error="handleFormatError"
+                                :show-upload-list="false"
+                                :on-exceeded-size="handleMaxSize">
+                            <i-button icon="ios-cloud-upload-outline">上传图片</i-button>
+                        </Upload>
+                    </Form-item>
+                </i-col>
+                <i-col span="3">
+                    <Form-item :label-width="1">
+                        <i-button icon="eye" @click="eyeImageScenePicUrl">预览图片</i-button>
+                    </Form-item>
+                </i-col>
+            </Row>
+            <!-- <Form-item label="子标题" prop="subtitle">
+                <i-input v-model="topic.subtitle" placeholder="子标题"/>
+            </Form-item> -->
+            <Form-item label="专题内容" prop="content">
+                <div id="content" placeholder="专题内容"></div>
+            </Form-item>
+            <!-- <Row>
                 <i-col span="16">
                     <Form-item label="图像" prop="avatar">
                         <i-input v-model="topic.avatar" placeholder="图像" readonly/>
@@ -62,8 +88,8 @@
                         <i-button icon="eye" @click="eyeImageAvatar">预览图片</i-button>
                     </Form-item>
                 </i-col>
-            </Row>
-            <Row>
+            </Row> -->
+            <!-- <Row>
                 <i-col span="16">
                     <Form-item label="活动条例图片" prop="itemPicUrl">
                         <i-input v-model="topic.itemPicUrl" placeholder="活动条例图片" readonly/>
@@ -85,48 +111,23 @@
                         <i-button icon="eye" @click="eyeImageItemPicUrl">预览图片</i-button>
                     </Form-item>
                 </i-col>
-            </Row>
-            <Form-item label="子标题" prop="subtitle">
-                <i-input v-model="topic.subtitle" placeholder="子标题"/>
-            </Form-item>
-            <Form-item label="活动类别" prop="topicCategoryId">
+            </Row> -->
+            <!-- <Form-item label="活动类别" prop="topicCategoryId">
                 <i-input v-model="topic.topicCategoryId" placeholder="活动类别"/>
-            </Form-item>
-            <Form-item label="活动价格" prop="priceInfo">
+            </Form-item> -->
+            <!-- <Form-item label="活动价格" prop="priceInfo">
                 <i-input v-model="topic.priceInfo" placeholder="活动价格"/>
-            </Form-item>
-            <Form-item label="readCount" prop="readCount">
+            </Form-item> -->
+            <!-- <Form-item label="readCount" prop="readCount">
                 <i-input v-model="topic.readCount" placeholder="readCount"/>
-            </Form-item>
-            <Row>
-                <i-col span="16">
-                    <Form-item label="场景图片" prop="scenePicUrl">
-                        <i-input v-model="topic.scenePicUrl" placeholder="场景图片" readonly/>
-                    </Form-item>
-                </i-col>
-                <i-col span="3">
-                    <Form-item :label-width="1">
-                        <Upload style="width: 300px;" action="../sys/oss/upload" :format="['jpg','jpeg','png']"
-                                max-size="2048"
-                                :on-success="handleSuccessScenePicUrl" :on-format-error="handleFormatError"
-                                :show-upload-list="false"
-                                :on-exceeded-size="handleMaxSize">
-                            <i-button icon="ios-cloud-upload-outline">上传图片</i-button>
-                        </Upload>
-                    </Form-item>
-                </i-col>
-                <i-col span="3">
-                    <Form-item :label-width="1">
-                        <i-button icon="eye" @click="eyeImageScenePicUrl">预览图片</i-button>
-                    </Form-item>
-                </i-col>
-            </Row>
-            <Form-item label="活动模板Id" prop="topicTemplateId">
+            </Form-item> -->
+
+            <!-- <Form-item label="活动模板Id" prop="topicTemplateId">
                 <i-input v-model="topic.topicTemplateId" placeholder="活动模板Id"/>
             </Form-item>
             <Form-item label="活动标签Id" prop="topicTagId">
                 <i-input v-model="topic.topicTagId" placeholder="活动标签Id"/>
-            </Form-item>
+            </Form-item> -->
             <Form-item>
                 <i-button type="primary" @click="handleSubmit('formValidate')">提交</i-button>
                 <i-button type="warning" @click="reload" style="margin-left: 8px"/>

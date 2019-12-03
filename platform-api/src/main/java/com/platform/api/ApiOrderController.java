@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -43,6 +44,8 @@ public class ApiOrderController extends ApiBaseAction {
     private ApiUserCouponService userCouponService;
     @Autowired
     private ApiProductService productService;
+    @Autowired
+    private WalletService walletService;
 
     /**
      */
@@ -172,6 +175,7 @@ public class ApiOrderController extends ApiBaseAction {
     /**
      * 获取订单列表
      */
+    @Transactional
     @ApiOperation(value = "取消订单")
     @RequestMapping("cancelOrder")
     public Object cancelOrder(Integer orderId) {
@@ -256,6 +260,7 @@ public class ApiOrderController extends ApiBaseAction {
     /**
      * 确认收货
      */
+    @Transactional
     @ApiOperation(value = "确认收货")
     @RequestMapping("confirmOrder")
     public Object confirmOrder(Integer orderId) {
@@ -265,6 +270,10 @@ public class ApiOrderController extends ApiBaseAction {
             orderVo.setShipping_status(2);
             orderVo.setConfirm_time(new Date());
             orderService.update(orderVo);
+            BigDecimal actual_price = orderVo.getActual_price();
+            WalletEntity wallet = walletService.findByShopId(orderVo.getMerchant_id());
+            wallet.setShopBalance(actual_price.add(wallet.getShopBalance()));
+            walletService.update(wallet);
             return toResponsSuccess("确认收货成功");
         } catch (Exception e) {
             e.printStackTrace();

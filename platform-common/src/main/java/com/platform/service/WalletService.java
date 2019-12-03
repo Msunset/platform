@@ -10,7 +10,7 @@ import java.util.Map;
  *
  * @author sunset
  * @email 1451795113@qq.com
- * @date 2019-11-21 16:15:09
+ * @date 2019-12-03 11:13:19
  */
 public interface WalletService {
 
@@ -69,4 +69,11 @@ public interface WalletService {
      * @return 删除条数
      */
     int deleteBatch(Integer[] ids);
+
+    /**
+     * 根据商铺id查询出商铺钱包信息
+     * @param merchant_id
+     * @return
+     */
+    WalletEntity findByShopId(Integer merchant_id);
 }

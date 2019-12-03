@@ -1,5 +1,6 @@
 package com.platform.controller;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 import com.platform.dao.SysUserDao;
@@ -238,7 +239,7 @@ public class ShopauditController {
                 WalletEntity walletEntity = new WalletEntity();
                 walletEntity.setShopId(user.getUserId());
                 walletEntity.setShopName(user.getMerchantName());
-                walletEntity.setShopBalance(0);
+                walletEntity.setShopBalance(new BigDecimal(0.00));
                 walletEntity.setLoginName(user.getUsername());
                 walletService.save(walletEntity);
 
