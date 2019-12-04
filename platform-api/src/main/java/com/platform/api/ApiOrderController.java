@@ -91,6 +91,7 @@ public class ApiOrderController extends ApiBaseAction {
                 item.setGoodsCount(goodsCount);
             }
         }
+        System.out.printf(orderEntityList.toString());
         return toResponsSuccess(pageUtil);
     }
 
@@ -277,7 +278,10 @@ public class ApiOrderController extends ApiBaseAction {
             return toResponsSuccess("确认收货成功");
         } catch (Exception e) {
             e.printStackTrace();
+            throw new RuntimeException("未知异常");
+
         }
-        return toResponsFail("提交失败");
+
+
     }
 }

@@ -65,6 +65,7 @@
         where 1 = 1
         and is_delete = 0
         and is_on_sale = 1
+        and is_secKill = 1
         <if test="is_new != null and is_new != ''">
             and is_new = #{is_new}
         </if>
