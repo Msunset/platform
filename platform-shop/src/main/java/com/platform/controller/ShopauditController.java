@@ -234,6 +234,7 @@ public class ShopauditController {
                 shopdataEntity.setType(shopaudit.getType());
                 shopdataEntity.setShopId(user.getUserId());
                 shopdataEntity.setUserid(shopaudit.getUserid());
+                shopdataEntity.setCash(new BigDecimal(0));
                 shopdataService.save(shopdataEntity);
                 //用户创建后创建钱包
                 WalletEntity walletEntity = new WalletEntity();

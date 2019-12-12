@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.platform.entity.GroupBuyingEntity;
 import com.platform.entity.OrderEntity;
+import com.platform.entity.OrderEntityM;
 
 /**
  * @author lipengjun
@@ -38,4 +39,6 @@ public interface OrderService {
     int confirm(Integer id);
 
     int sendGoods(OrderEntity order);
+    OrderEntityM queryObjectM(Integer id);
+    List<OrderEntityM> queryListM(Map<String, Object> map);
 }

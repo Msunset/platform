@@ -24,13 +24,14 @@ $(function () {
             {label: '订单号', name: 'orderSn', index: 'order_sn', width: 100},
             {label: '会员', name: 'userName', index: 'user_name', width: 80},
             {label: '真实姓名', name: 'realName', index: 'real_name', width: 80},
+            {label: '订单个数', name: 'realNames', index: 'real_name', width: 80},
             {
                 label: '订单类型', name: 'orderType', index: 'order_type', width: 80, formatter: function (value) {
                     if (value == '1') {
                         return '购物车订单';
-                    } else if (value == '2') {
-                        return '普通订单';
                     } else if (value == '3') {
+                        return '普通订单';
+                    } else if (value == '2') {
                         return '秒杀订单';
                     } else if (value == '4') {
                         return '团购订单';
@@ -97,6 +98,8 @@ $(function () {
             {label: '快递单号', name: 'shippingNo', index: 'shipping_No', width: 80},
             {label: '实际支付金额', name: 'actualPrice', index: 'actual_price', width: 80},
             {label: '订单总价', name: 'orderPrice', index: 'order_price', width: 60},
+            {label: '商品单价', name: 'retailPrice', index: 'order_price', width: 60},
+            {label: '下单数量', name: 'number', index: 'order_price', width: 60},
             {label: '商品总价', name: 'goodsPrice', index: 'goods_price', width: 60},
             {
                 label: '下单时间', name: 'addTime', index: 'add_time', width: 80,
@@ -129,6 +132,7 @@ let vm = new Vue({
         }
     },
     methods: {
+        
         query: function () {
             vm.reload();
         },
@@ -146,6 +150,7 @@ let vm = new Vue({
                     vm.order = r.order;
                 }
             });
+            console.log(this.data.order)
         },
         confirm: function (event) {
             let id = getSelectedRow("#jqGrid");

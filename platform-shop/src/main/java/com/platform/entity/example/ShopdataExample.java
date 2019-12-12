@@ -1,6 +1,7 @@
 package com.platform.entity.example;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  *
  * @author xuyang
  * @email 295640759@qq.com
- * @date 2019-11-25 13:19:42
+ * @date 2019-12-11 16:06:48
  */
 public class ShopdataExample extends AbstractExample  {
     private static final long serialVersionUID = 1L;
@@ -627,6 +628,64 @@ public class ShopdataExample extends AbstractExample  {
 
         public Criteria andShopIdNotBetween(Long value1, Long value2) {
             addCriterion("shop_id not between", value1, value2, "shopId");
+            return (Criteria) this;
+        }
+            public Criteria andCashIsNull() {
+            addCriterion("cash is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCashIsNotNull() {
+            addCriterion("cash is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCashEqualTo(BigDecimal value) {
+            addCriterion("cash =", value, "cash");
+            return (Criteria) this;
+        }
+
+        public Criteria andCashNotEqualTo(BigDecimal value) {
+            addCriterion("cash <>", value, "cash");
+            return (Criteria) this;
+        }
+
+        public Criteria andCashGreaterThan(BigDecimal value) {
+            addCriterion("cash >", value, "cash");
+            return (Criteria) this;
+        }
+
+        public Criteria andCashGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("cash >=", value, "cash");
+            return (Criteria) this;
+        }
+
+        public Criteria andCashLessThan(BigDecimal value) {
+            addCriterion("cash <", value, "cash");
+            return (Criteria) this;
+        }
+
+        public Criteria andCashLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("cash <=", value, "cash");
+            return (Criteria) this;
+        }
+            public Criteria andCashIn(List<BigDecimal> values) {
+            addCriterion("cash in", values, "cash");
+            return (Criteria) this;
+        }
+
+        public Criteria andcashNotIn(List<BigDecimal> values) {
+            addCriterion("cash not in", values, "cash");
+            return (Criteria) this;
+        }
+
+        public Criteria andCashBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("cash between", value1, value2, "cash");
+            return (Criteria) this;
+        }
+
+        public Criteria andCashNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("cash not between", value1, value2, "cash");
             return (Criteria) this;
         }
     }

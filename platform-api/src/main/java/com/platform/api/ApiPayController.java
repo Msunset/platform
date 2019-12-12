@@ -193,6 +193,7 @@ public class ApiPayController extends ApiBaseAction {
     @ApiOperation(value = "查询订单状态")
     @GetMapping("query")
     public Object orderQuery(@LoginUser UserVo loginUser, Integer orderId) {
+        System.out.printf("进入查询订单");
         if (orderId == null) {
             return toResponsFail("订单不存在");
         }
@@ -360,6 +361,7 @@ public class ApiPayController extends ApiBaseAction {
     @IgnoreAuth
     @ResponseBody
     public void notify(HttpServletRequest request, HttpServletResponse response) {
+
     	try {
             request.setCharacterEncoding("UTF-8");
             response.setCharacterEncoding("UTF-8");

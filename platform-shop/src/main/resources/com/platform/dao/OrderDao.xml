@@ -53,6 +53,12 @@
         left join nideshop_user u on o.user_id = u.id
         where o.id = #{value}
 	</select>
+    <select id="queryObjectM" resultType="com.platform.entity.OrderEntityM">
+		select o.*,u.username,u.real_name
+        from nideshop_order o
+        left join nideshop_user u on o.user_id = u.id
+        where o.id = #{value}
+	</select>
 
     <select id="queryList" resultType="com.platform.entity.OrderEntity">
         SELECT 
@@ -63,6 +69,48 @@
         o.order_price as orderPrice,o.goods_price as goodsPrice,
         o.add_time as addTime, g.goods_name, g.list_pic_url,g.id as gid
         FROM nideshop_order o 
+        LEFT JOIN nideshop_user u ON o.user_id = u.id
+        LEFT JOIN nideshop_order_goods g ON o.id = g.order_id
+        WHERE 1=1
+        <if test="orderSn != null and orderSn.trim() != ''">
+            AND o.order_sn LIKE concat('%',#{orderSn},'%')
+        </if>
+        <if test="shippingStatus != null and shippingStatus.trim() != ''">
+            AND o.shipping_status = #{shippingStatus}
+        </if>
+        <if test="payStatus != null and payStatus.trim() != ''">
+            AND o.pay_status = #{payStatus}
+        </if>
+        <if test="orderStatus != null and orderStatus.trim() != ''">
+            AND o.order_status = #{orderStatus}
+        </if>
+        <if test="orderType != null and orderType.trim() != ''">
+            AND o.order_type = #{orderType}
+        </if>
+        <if test="merchantId != null and merchantId != ''">
+            AND o.merchant_id = #{merchantId}
+        </if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+    <select id="queryListM" resultType="com.platform.entity.OrderEntityM">
+        SELECT
+        o.id AS id,o.order_sn as orderSn,u.username AS username,u.real_name as realName,o.order_type as orderType,
+        o.order_status as orderStatus, o.shipping_status as shippingStatus,
+        o.pay_status as payStatus,o.shipping_name as shippingName, o.merchant_id as merchantId,
+        o.shipping_no as shippingNo,o.actual_price as actualPrice,
+        o.order_price as orderPrice,o.goods_price as goodsPrice,
+        o.add_time as addTime, g.goods_name, g.list_pic_url,g.id as gid
+        FROM nideshop_order o
         LEFT JOIN nideshop_user u ON o.user_id = u.id
         LEFT JOIN nideshop_order_goods g ON o.id = g.order_id
         WHERE 1=1

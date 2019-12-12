@@ -1,6 +1,7 @@
 package com.platform.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class NideshopShopaudit {
     private Integer id;
@@ -29,7 +30,7 @@ public class NideshopShopaudit {
 
     private String idcard;
 
-    private String idcardimage;
+    private List<String> idcardimage;
 
     public Integer getId() {
         return id;
@@ -44,7 +45,7 @@ public class NideshopShopaudit {
     }
 
     public void setShopname(String shopname) {
-        this.shopname = shopname == null ? null : shopname.trim();
+        this.shopname = shopname;
     }
 
     public String getType() {
@@ -52,7 +53,7 @@ public class NideshopShopaudit {
     }
 
     public void setType(String type) {
-        this.type = type == null ? null : type.trim();
+        this.type = type;
     }
 
     public String getBusiness() {
@@ -60,7 +61,7 @@ public class NideshopShopaudit {
     }
 
     public void setBusiness(String business) {
-        this.business = business == null ? null : business.trim();
+        this.business = business;
     }
 
     public String getBrand() {
@@ -68,7 +69,7 @@ public class NideshopShopaudit {
     }
 
     public void setBrand(String brand) {
-        this.brand = brand == null ? null : brand.trim();
+        this.brand = brand;
     }
 
     public String getAptitude() {
@@ -76,7 +77,7 @@ public class NideshopShopaudit {
     }
 
     public void setAptitude(String aptitude) {
-        this.aptitude = aptitude == null ? null : aptitude.trim();
+        this.aptitude = aptitude;
     }
 
     public String getAdminname() {
@@ -84,7 +85,7 @@ public class NideshopShopaudit {
     }
 
     public void setAdminname(String adminname) {
-        this.adminname = adminname == null ? null : adminname.trim();
+        this.adminname = adminname;
     }
 
     public String getPhone() {
@@ -92,7 +93,7 @@ public class NideshopShopaudit {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
+        this.phone = phone;
     }
 
     public String getEmail() {
@@ -100,7 +101,7 @@ public class NideshopShopaudit {
     }
 
     public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
+        this.email = email;
     }
 
     public Integer getState() {
@@ -124,7 +125,7 @@ public class NideshopShopaudit {
     }
 
     public void setUserid(String userid) {
-        this.userid = userid == null ? null : userid.trim();
+        this.userid = userid;
     }
 
     public String getIdcard() {
@@ -132,14 +133,14 @@ public class NideshopShopaudit {
     }
 
     public void setIdcard(String idcard) {
-        this.idcard = idcard == null ? null : idcard.trim();
+        this.idcard = idcard;
     }
 
-    public String getIdcardimage() {
+    public List<String> getIdcardimage() {
         return idcardimage;
     }
 
-    public void setIdcardimage(String idcardimage) {
-        this.idcardimage = idcardimage == null ? null : idcardimage.trim();
+    public void setIdcardimage(List<String> idcardimage) {
+        this.idcardimage = idcardimage;
     }
 }

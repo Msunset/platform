@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.platform.entity.GroupBuyingEntity;
 import com.platform.entity.OrderEntity;
+import com.platform.entity.OrderEntityM;
 
 /**
  * 
@@ -16,5 +17,7 @@ import com.platform.entity.OrderEntity;
 public interface OrderDao extends BaseDao<OrderEntity> {
     List<GroupBuyingEntity> queryGroupList(Map<String, Object> map);
     int queryGroupTotal(Map<String, Object> map);
+    OrderEntityM queryObjectM(Integer id);
+    List<OrderEntityM> queryListM(Map<String, Object> map);
 	
 }

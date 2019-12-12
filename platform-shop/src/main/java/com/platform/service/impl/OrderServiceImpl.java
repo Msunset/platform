@@ -3,6 +3,7 @@ package com.platform.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import com.platform.entity.OrderEntityM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -91,9 +92,18 @@ public class OrderServiceImpl implements OrderService {
         order.setShippingStatus(1);//已发货
         return orderDao.update(order);
     }
-    
-    
-    
+
+    @Override
+    public OrderEntityM queryObjectM(Integer id) {
+        return orderDao.queryObjectM(id);
+    }
+
+    @Override
+    public List<OrderEntityM> queryListM(Map<String, Object> map) {
+        return orderDao.queryListM(map);
+    }
+
+
     @Override
     public List<GroupBuyingEntity> queryGroupList(Map<String, Object> map) {
         return orderDao.queryGroupList(map);

@@ -1,17 +1,16 @@
 package com.platform.api;
 
-import com.platform.dao.NideshopShopauditMapper;
 import com.platform.dao.SysUserDao;
-import com.platform.entity.NideshopShopaudit;
 import com.platform.entity.ShopauditEntity;
 import com.platform.service.ApiShopAuditService;
-import com.platform.utils.R;
 import com.platform.utils.ResultState;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.ibatis.annotations.ResultMap;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Api(tags = "商户管理")
 @RestController
@@ -24,6 +23,7 @@ public class ApiShopAuditController {
     @ApiOperation("商户添加")
     @PostMapping("/save")
     public ResultState saveShop(@RequestBody ShopauditEntity nideshopShopaudit){
+
         try {
             ResultState exit = isExit(nideshopShopaudit);
             if (exit==null){

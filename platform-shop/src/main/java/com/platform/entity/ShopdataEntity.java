@@ -1,6 +1,7 @@
 package com.platform.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Date;
  *
  * @author sunset
  * @email 1451795113@qq.com
- * @date 2019-11-25 13:19:42
+ * @date 2019-12-11 16:06:48
  */
 public class ShopdataEntity implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -34,6 +35,8 @@ public class ShopdataEntity implements Serializable {
     private String idcardimage;
     //商户id
     private Long shopId;
+    //保证金
+    private BigDecimal cash;
 
     /**
      * 设置：
@@ -164,5 +167,18 @@ public class ShopdataEntity implements Serializable {
      */
     public Long getShopId() {
         return shopId;
+    }
+    /**
+     * 设置：保证金
+     */
+    public void setCash(BigDecimal cash) {
+        this.cash = cash;
+    }
+
+    /**
+     * 获取：保证金
+     */
+    public BigDecimal getCash() {
+        return cash;
     }
 }
