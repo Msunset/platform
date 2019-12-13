@@ -30,7 +30,7 @@ public class NideshopShopaudit {
 
     private String idcard;
 
-    private List<String> idcardimage;
+    private String idcardimage;
 
     public Integer getId() {
         return id;
@@ -136,11 +136,11 @@ public class NideshopShopaudit {
         this.idcard = idcard;
     }
 
-    public List<String> getIdcardimage() {
+    public String getIdcardimage() {
         return idcardimage;
     }
 
-    public void setIdcardimage(List<String> idcardimage) {
+    public void setIdcardimage(String idcardimage) {
         this.idcardimage = idcardimage;
     }
 }

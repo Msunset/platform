@@ -42,7 +42,7 @@ public class ShopauditEntity implements Serializable {
     //身份证号
     private String idcard;
     //身份证图片
-    private Object idcardimage;
+    private String idcardimage;
     //店铺账号
     private String shopAccount;
     //店铺账号密码
@@ -156,11 +156,11 @@ public class ShopauditEntity implements Serializable {
         this.idcard = idcard;
     }
 
-    public Object getIdcardimage() {
+    public String getIdcardimage() {
         return idcardimage;
     }
 
-    public void setIdcardimage(Object idcardimage) {
+    public void setIdcardimage(String idcardimage) {
         this.idcardimage = idcardimage;
     }
 
