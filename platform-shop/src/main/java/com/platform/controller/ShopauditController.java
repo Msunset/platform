@@ -8,6 +8,9 @@ import com.platform.entity.*;
 import com.platform.service.ShopdataService;
 import com.platform.service.SysUserService;
 import com.platform.service.WalletService;
+import com.platform.utils.PageUtils;
+import com.platform.utils.Query;
+import com.platform.utils.R;
 import com.platform.utils.ResultState;
 import com.platform.validator.ValidatorUtils;
 import com.platform.validator.group.AddGroup;
@@ -16,11 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.platform.service.ShopauditService;
-import com.platform.utils.PageUtils;
-import com.platform.utils.Query;
-import com.platform.utils.R;
-
-import static com.platform.utils.ShiroUtils.getUserId;
 
 /**
  * Controller

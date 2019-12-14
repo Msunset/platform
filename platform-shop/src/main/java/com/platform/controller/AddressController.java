@@ -1,7 +1,6 @@
 package com.platform.controller;
 
 import com.platform.entity.AddressEntity;
-import com.platform.entity.CollectEntity;
 import com.platform.service.AddressService;
 import com.platform.utils.Base64;
 import com.platform.utils.PageUtils;

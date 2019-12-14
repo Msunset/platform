@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.platform.entity.*;
+import com.platform.utils.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,11 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.platform.service.OrderGoodsService;
 import com.platform.service.OrderService;
 import com.platform.service.ShippingService;
-import com.platform.utils.Base64;
-import com.platform.utils.PageUtils;
-import com.platform.utils.Query;
-import com.platform.utils.R;
-import com.platform.utils.ShiroUtils;
+
 /**
  * @author lipengjun
  * @email 939961241@qq.com

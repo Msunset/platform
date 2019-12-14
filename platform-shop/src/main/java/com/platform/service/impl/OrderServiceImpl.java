@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.platform.entity.OrderEntityM;
+import com.platform.utils.RRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,6 @@ import com.platform.entity.GroupBuyingEntity;
 import com.platform.entity.OrderEntity;
 import com.platform.entity.ShippingEntity;
 import com.platform.service.OrderService;
-import com.platform.utils.RRException;
 
 
 @Service("orderService")

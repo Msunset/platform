@@ -8,6 +8,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.platform.utils.PageUtils;
+import com.platform.utils.Query;
+import com.platform.utils.R;
+import com.platform.utils.excel.ExcelExport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,10 +24,6 @@ import com.platform.dao.UserDao;
 import com.platform.entity.AddressEntity;
 import com.platform.entity.CustomerEntity;
 import com.platform.service.CustomerService;
-import com.platform.utils.PageUtils;
-import com.platform.utils.Query;
-import com.platform.utils.R;
-import com.platform.utils.excel.ExcelExport;
 
 import jdk.nashorn.internal.ir.annotations.Ignore;
 

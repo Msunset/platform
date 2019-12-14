@@ -3,11 +3,11 @@ package com.platform.controller;
 import com.platform.entity.BrandEntity;
 import com.platform.entity.SysUserEntity;
 import com.platform.service.BrandService;
+
 import com.platform.utils.PageUtils;
 import com.platform.utils.Query;
 import com.platform.utils.R;
 import com.platform.utils.ShiroUtils;
-
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

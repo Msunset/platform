@@ -53,6 +53,7 @@
 	        	/sys/login=anon
 	        	/shopaudit/**=anon
 				/logistics/**=anon
+				/pay/result=anon
 	        	/captcha.jpg=anon
 	        	/**=authc
 	        </value>
