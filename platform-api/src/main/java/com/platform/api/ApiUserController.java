@@ -205,6 +205,8 @@ public class ApiUserController extends ApiBaseAction {
 	@ApiOperation(value = "总佣金 可提现金额")
 	@RequestMapping("getMlsUser")
 	public Object getMlsUser(@LoginUser UserVo loginUser) {
+		System.out.printf(String.valueOf(loginUser));
+
 		MlsUserEntity2 mlsUser= new MlsUserEntity2();
 		mlsUser.setUserId(loginUser.getUserId());
 		List<MlsUserEntity2> mlsUserList=	mlsUserSer.getEntityMapper().findByEntity(mlsUser);

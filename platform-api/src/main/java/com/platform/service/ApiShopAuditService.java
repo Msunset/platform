@@ -18,6 +18,7 @@ public class ApiShopAuditService {
 
     //保存商户
     public void save(ShopauditEntity shopaudit){
+
         shopaudit.setState(0);
         shopaudit.setCreattime(new Date());
         shopauditMapper.insert(shopaudit);
@@ -33,5 +34,13 @@ public class ApiShopAuditService {
         }else {
             return null;
         }
+    }
+    public List<ShopauditEntity> findByUserId(String userId) {
+        ShopauditExample example = new ShopauditExample();
+        ShopauditExample.Criteria criteria = example.createCriteria();
+        criteria.andUseridEqualTo(userId);
+        List<ShopauditEntity> shopauditEntities = shopauditMapper.selectByExample(example);
+        return shopauditEntities;
+
     }
 }

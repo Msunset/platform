@@ -139,7 +139,6 @@ public class ApiPayController extends ApiBaseAction {
             String sign = WechatUtil.arraySign(parame, ResourceUtil.getConfigByName("wx.paySignKey"));
             // 数字签证
             parame.put("sign", sign);
-
             String xml = MapUtils.convertMap2Xml(parame);
             System.out.println("***************xml="+xml+"***************");
             Map<String, Object> resultUn = XmlUtil.xmlStrToMap(WechatUtil.requestOnce(ResourceUtil.getConfigByName("wx.uniformorder"), xml));

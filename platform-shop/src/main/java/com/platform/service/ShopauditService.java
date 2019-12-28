@@ -90,4 +90,11 @@ public interface ShopauditService {
      * @return
      */
     List<ShopauditEntity> findByPhone(String phone);
+
+    /**
+     * 根据用户唯一id查询
+     * @param userId
+     * @return
+     */
+    List<ShopauditEntity> findByUserId(String userId);
 }

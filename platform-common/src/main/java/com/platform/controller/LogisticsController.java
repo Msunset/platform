@@ -36,6 +36,7 @@ public class LogisticsController {
             }
             HttpResponse response = HttpUtils.doGet(host, path, method, headers, querys);
             String s = EntityUtils.toString(response.getEntity());
+            System.out.printf(s);
             System.out.println("-------开始存入缓存");
             RedisUtils.set(logistics,s,60);
             System.out.println("----缓存存入成功");

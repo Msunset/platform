@@ -16,6 +16,7 @@ import com.platform.validator.ValidatorUtils;
 import com.platform.validator.group.AddGroup;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import com.platform.service.ShopauditService;
@@ -52,6 +53,10 @@ public class ShopauditController {
         //查询列表数据
         params.put("page",page);
         params.put("limit",size);
+        if(params.get("state") == null || "".equals(params.get("state"))){
+            params.put("state","0");
+        }
+
         Query query = new Query(params);
 
         List<ShopauditEntity> shopauditList = shopauditService.queryList(query);
@@ -143,20 +148,13 @@ public class ShopauditController {
     public ResultState save(@RequestBody ShopauditEntity shopaudit) {
         ResultState exit = isExit(shopaudit);
 
-
-        try {
             if (exit==null){
             shopauditService.save(shopaudit);
             return new ResultState("申请成功",true,ResultState.OK);
             }else {
                 return exit;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResultState("数据异常",false,ResultState.ERROR);
         }
-
-    }
 
     //判断是否重复
     private ResultState isExit(ShopauditEntity shopAudit){
@@ -179,17 +177,18 @@ public class ShopauditController {
     /**
      * 根据主键修改商家审核状态
      */
+    @Transactional
     @RequestMapping("/update")
-//    @RequiresPermissions("shopaudit:update")
-    public ResultState update(@RequestBody ShopauditEntity shopaudit,@RequestParam Integer state) {
-        System.out.printf(shopaudit.toString());
+    @RequiresPermissions("shopaudit:update")
+    public ResultState update(@RequestBody ShopauditEntity shopaudit) {
+            Integer state = shopaudit.getState();
 
             shopauditService.update(shopaudit,state);
             //1.创建账号
             if (state==1){//审核通过正常登陆
-
                 ResultState exit = isExit(shopaudit);
                 if (exit == null){
+
 //                int count=sysUserDao.mlsPhoneCount(shopaudit.getPhone());
 //                if(count>0) {
 //                    return new ResultState("手机号已经存在",false,ResultState.ERROR);

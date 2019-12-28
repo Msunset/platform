@@ -1,15 +1,15 @@
 package com.platform.service.impl;
 
+import com.platform.dao.ShopauditMapper;
+import com.platform.entity.ShopauditEntity;
 import com.platform.entity.example.ShopauditExample;
+import com.platform.service.ShopauditService;
+import io.swagger.annotations.Example;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-
-import com.platform.dao.ShopauditMapper;
-import com.platform.entity.ShopauditEntity;
-import com.platform.service.ShopauditService;
 
 /**
  * Service实现类
@@ -100,6 +100,16 @@ public class ShopauditServiceImpl implements ShopauditService {
         ShopauditExample.Criteria criteria = example.createCriteria();
         criteria.andPhoneLike("%"+phone+"%");
         return shopauditMapper.selectByExample(example);
+
+    }
+
+    @Override
+    public List<ShopauditEntity> findByUserId(String userId) {
+        ShopauditExample example = new ShopauditExample();
+        ShopauditExample.Criteria criteria = example.createCriteria();
+        criteria.andUseridEqualTo(userId);
+        List<ShopauditEntity> shopauditEntities = shopauditMapper.selectByExample(example);
+        return shopauditEntities;
 
     }
 }

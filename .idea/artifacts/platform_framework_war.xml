@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="platform-framework.war">
+    <root id="archive" name="wenyou.war">
       <element id="artifact" artifact-name="platform-framework:war exploded" />
     </root>
   </artifact>

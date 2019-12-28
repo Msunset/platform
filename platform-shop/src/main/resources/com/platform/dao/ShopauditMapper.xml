@@ -117,11 +117,11 @@
             limit ${pageStart},${pageSize}
         </if>
     </select>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
         select
         <include refid="Base_Column_List" />
         from nideshop_shopaudit
-        where id = #{id,jdbcType=BIGINT}
+        where id = #{id}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
         delete from nideshop_shopaudit
@@ -450,8 +450,11 @@
           `password`
         from nideshop_shopaudit
         WHERE 1=1
-        <if test="name != null and name.trim() != ''">
-            AND name LIKE concat('%',#{name},'%')
+        <if test="shopname != null and shopname.trim() != ''">
+            AND shopname LIKE concat('%',#{shopname},'%')
+        </if>
+        <if test="state != null and state.trim() !=''">
+            AND state = #{state}
         </if>
         <choose>
             <when test="sidx != null and sidx.trim() != ''">
